@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crea tu cuenta en UniPath y comienza a planificar tu ruta académica.">
+
+    <title>Crear cuenta | UniPath</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="wwwroot/css/Registro.css">
+    <script src="wwwroot/js/Registro.js" defer></script>
+</head>
+
+<body class="auth-body">
+
+    <main class="auth-shell register-shell">
+
+        <section class="auth-brand" aria-label="Presentación de UniPath">
+
+            <a class="auth-logo" href="index.html" aria-label="Volver al panel principal">
+                <img src="wwwroot/assets/Logotipo UniPath con ícono de conexión.png" alt="UniPath">
+            </a>
+
+            <div class="brand-copy">
+                <p class="eyebrow">PLANIFICA TU FUTURO</p>
+
+                <h1>Tu futuro empieza<br>con un buen plan.</h1>
+
+                <p class="brand-description">
+                    Crea tu cuenta y comienza a diseñar una ruta
+                    académica pensada para ti.
+                </p>
+            </div>
+
+            <div class="brand-footer">
+                Organiza tus materias y avanza hacia tu meta de graduación.
+            </div>
+
+        </section>
+
+        <section class="auth-content">
+
+            <div class="auth-card">
+
+                <a class="back-link" href="login.html">
+                    Ya tengo cuenta
+                </a>
+
+                <div class="form-heading">
+                    <p class="eyebrow">EMPECEMOS TU CAMINO</p>
+
+                    <h2>Crear cuenta</h2>
+
+                    <p class="muted">
+                        Completa tus datos para personalizar tu experiencia.
+                    </p>
+                </div>
+
+                <form id="registerForm">
+
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo</label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Ej. Estefanía Rodríguez"
+                            autocomplete="name"
+                            minlength="3"
+                            maxlength="100"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="university">Universidad</label>
+
+                        <input
+                            type="text"
+                            id="university"
+                            name="university"
+                            placeholder="Nombre de universidad"
+                            autocomplete="organization"
+                            maxlength="150"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Correo electrónico</label>
+
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            name="email"
+                            placeholder="tu@universidad.ac.cr"
+                            autocomplete="email"
+                            maxlength="254"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="career">Carrera</label>
+
+                        <input
+                            type="text"
+                            id="career"
+                            name="career"
+                            placeholder="Ej. Ingeniería en Sistemas"
+                            maxlength="150"
+                            required>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="registerPassword">Contraseña</label>
+
+                            <input
+                                type="password"
+                                id="registerPassword"
+                                name="password"
+                                placeholder="Mínimo 6 caracteres"
+                                autocomplete="new-password"
+                                minlength="6"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar contraseña</label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Repite la contraseña"
+                                autocomplete="new-password"
+                                minlength="6"
+                                required>
+                        </div>
+
+                    </div>
+
+                    <label class="check-label terms" for="terms">
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            name="terms"
+                            required>
+
+                        <span>
+                            Entiendo que esta es una versión de demostración
+                            y que mis datos no se enviarán a un servidor.
+                        </span>
+                    </label>
+
+                    <button class="primary-button" type="submit">
+                        Crear mi cuenta
+                    </button>
+
+                    <p
+                        class="form-message"
+                        id="registerMessage"
+                        role="status"
+                        aria-live="polite"
+                        hidden>
+                    </p>
+
+                </form>
+
+                <p class="switch-auth">
+                    ¿Ya tienes una cuenta?
+                    <a href="login.html">Iniciar sesión</a>
+                </p>
+
+                <p class="demo-note">
+                    Prototipo académico. No utilices una contraseña real
+                    ni una contraseña que uses en otros servicios.
+                </p>
+
+            </div>
+
+            <footer class="auth-footer">
+                UniPath · Tu camino universitario, más claro.
+            </footer>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
