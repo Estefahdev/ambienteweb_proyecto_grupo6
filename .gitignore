@@ -17,3 +17,8 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 desktop.ini
+
+
+# Credenciales locales de la base de datos
+config/config.php
+config/ca.pem

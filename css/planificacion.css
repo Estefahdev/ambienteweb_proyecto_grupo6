@@ -1,0 +1,535 @@
+/* ==========================================
+   PLANIFICACIÓN: situación personal, generador y mis rutas
+   Usa las variables de color de index.css
+========================================== */
+
+.plan-page {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* --text-secondary no llega a 4.5:1 sobre fondos de color; este gris sí */
+.plan-heading p,
+.summary-list dt {
+    color: #4F5D6A;
+}
+
+/* ==========================================
+   ENCABEZADO
+========================================== */
+
+.plan-heading {
+    max-width: 640px;
+    margin: 8px 0 24px;
+}
+
+.plan-heading h1 {
+    margin-bottom: 6px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.plan-heading p {
+    font-size: 15px;
+}
+
+/* ==========================================
+   DISTRIBUCIÓN: formulario + resumen
+========================================== */
+
+.plan-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    align-items: start;
+    gap: 20px;
+}
+
+.plan-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.plan-card {
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.card-head {
+    margin-bottom: 20px;
+}
+
+.card-head h2 {
+    margin-bottom: 4px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.card-head p,
+.card-note {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.card-note {
+    margin-top: 14px;
+}
+
+/* ==========================================
+   TARJETAS SELECCIONABLES (tipo de trabajo)
+========================================== */
+
+.choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.choice {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+/* El radio queda oculto pero sigue siendo usable con teclado */
+.choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.choice:hover {
+    border-color: #C9D6DE;
+}
+
+.choice:has(input:checked) {
+    border-color: var(--primary);
+    background: var(--blue-bg);
+    box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.choice:has(input:focus-visible) {
+    outline: 2px solid var(--secondary);
+    outline-offset: 3px;
+}
+
+.choice-title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.choice:has(input:checked) .choice-title {
+    color: var(--primary);
+}
+
+.choice-text {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+/* ==========================================
+   HORARIO LABORAL (cuadrícula semanal)
+========================================== */
+
+.schedule-wrap {
+    overflow-x: auto;
+}
+
+.schedule {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px;
+    table-layout: fixed;
+}
+
+.schedule th {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.schedule thead th:first-child {
+    width: 120px;
+}
+
+.schedule abbr {
+    text-decoration: none;
+}
+
+.schedule tbody th {
+    padding-right: 8px;
+    text-align: left;
+}
+
+.schedule tbody th strong {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.schedule tbody th span {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 48px;
+    border: 1px dashed #C9D6DE;
+    border-radius: 8px;
+    background: var(--surface);
+
+    color: var(--text-secondary);
+    font-size: 12px;
+
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.slot input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slot:hover {
+    border-color: var(--primary);
+}
+
+.slot:has(input:checked) {
+    border: 1px solid var(--primary);
+    background: var(--primary);
+    color: var(--surface);
+    font-weight: 600;
+}
+
+.slot:has(input:focus-visible) {
+    outline: 2px solid var(--secondary);
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   CAMPOS
+========================================== */
+
+.field-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.field label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.optional {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+
+    border: 1px solid #CBD6DD;
+    border-radius: 8px;
+    background: var(--surface);
+
+    color: var(--text);
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+}
+
+.field select {
+    cursor: pointer;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: var(--primary);
+    outline: 2px solid var(--blue-bg);
+    outline-offset: 0;
+}
+
+/* Campo con prefijo o sufijo (₡, h) */
+.input-affix {
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #CBD6DD;
+    border-radius: 8px;
+    background: var(--surface);
+}
+
+.input-affix:focus-within {
+    border-color: var(--primary);
+    outline: 2px solid var(--blue-bg);
+}
+
+.input-affix input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+}
+
+.input-affix input:focus {
+    outline: none;
+}
+
+.affix {
+    padding: 0 12px;
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+.input-affix .affix:first-child {
+    padding-right: 0;
+}
+
+.input-affix .affix:last-child {
+    padding-left: 0;
+}
+
+.field-help {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.field-error {
+    color: #B5423D;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.plan-card > .field-error {
+    margin-top: 12px;
+}
+
+.field:has([aria-invalid="true"]) input,
+.field:has([aria-invalid="true"]) select,
+.field:has([aria-invalid="true"]) .input-affix {
+    border-color: var(--danger);
+}
+
+/* ==========================================
+   BOTONES
+========================================== */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.save-status {
+    margin-right: auto;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.button-primary,
+.button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 0 18px;
+
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.button-primary {
+    border: 0;
+    background: var(--primary);
+    color: var(--surface);
+}
+
+.button-primary:hover {
+    background: #19445B;
+}
+
+.button-secondary {
+    border: 1px solid #CBD6DD;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.button-secondary:hover {
+    background: var(--gray-bg);
+}
+
+/* ==========================================
+   RESUMEN LATERAL
+========================================== */
+
+.plan-summary {
+    position: sticky;
+    top: 20px;
+
+    padding: 24px;
+    border-radius: var(--radius);
+    background: var(--blue-bg);
+}
+
+.plan-summary h2 {
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.summary-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #D5E3EE;
+}
+
+.summary-list div:last-child {
+    border-bottom: 0;
+}
+
+.summary-list dd {
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.summary-finding {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--surface);
+    font-size: 13px;
+}
+
+.summary-finding.is-warning {
+    border-left: 3px solid var(--accent);
+}
+
+.summary-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.summary-link:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   PANTALLAS MEDIANAS: el resumen pasa abajo
+========================================== */
+
+@media (max-width: 1150px) {
+    .plan-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .plan-summary {
+        position: static;
+    }
+}
+
+/* ==========================================
+   TELÉFONOS
+========================================== */
+
+@media (max-width: 760px) {
+    .plan-heading h1 {
+        font-size: 24px;
+    }
+
+    .plan-card,
+    .plan-summary {
+        padding: 16px;
+    }
+
+    .choice-grid,
+    .field-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .schedule thead th:first-child {
+        width: 72px;
+    }
+
+    .schedule tbody th span {
+        display: none;
+    }
+
+    /* En pantallas angostas el bloque se ve por el color, sin texto */
+    .slot-text {
+        display: none;
+    }
+
+    .form-actions {
+        flex-wrap: wrap;
+    }
+
+    .save-status {
+        flex-basis: 100%;
+    }
+
+    .form-actions .button-primary,
+    .form-actions .button-secondary {
+        flex: 1;
+    }
+}
+
+/* index.css baja el margen a 11px; aquí se mantiene en 16px */
+@media (max-width: 400px) {
+    .plan-page {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .choice,
+    .slot,
+    .button-primary,
+    .button-secondary {
+        transition: none;
+    }
+}
