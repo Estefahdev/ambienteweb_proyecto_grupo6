@@ -1,7 +1,15 @@
 "use strict";
 
-// Clave de localStorage; el generador de rutas lee la misma
-const STORAGE_KEY = "unipath.situacionPersonal";
+const API_URL = "api/situacion-personal.php";
+
+// Errores del servidor → id del mensaje junto a cada campo
+const ERRORES_SERVIDOR = {
+    tipoTrabajo: ["trabajoError", null],
+    horasDisponibles: ["horasError", "horasDisponibles"],
+    presupuesto: ["presupuestoError", "presupuesto"],
+    maxMaterias: ["maxMateriasError", "maxMaterias"],
+    fechaMeta: ["fechaMetaError", "fechaMeta"]
+};
 
 const DIAS = [
     { id: "lun", nombre: "Lunes" },
@@ -128,13 +136,18 @@ function leerFormulario() {
     };
 }
 
-function cargarGuardado() {
+async function cargarGuardado() {
     let guardado = null;
 
     try {
-        guardado = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        const respuesta = await fetch(API_URL);
+        if (!respuesta.ok) {
+            throw new Error(`HTTP ${respuesta.status}`);
+        }
+        guardado = (await respuesta.json()).situacion;
     } catch {
-        guardado = null;
+        saveStatus.textContent = "No se pudieron cargar tus datos guardados.";
+        return;
     }
 
     if (!guardado) {
@@ -297,7 +310,7 @@ function validar(datos) {
 form.addEventListener("input", actualizarResumen);
 form.addEventListener("change", actualizarResumen);
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const datos = leerFormulario();
@@ -314,19 +327,54 @@ form.addEventListener("submit", (event) => {
         horasDisponibles: Number(datos.horasDisponibles),
         presupuesto: Number(datos.presupuesto),
         maxMaterias: Number(datos.maxMaterias),
-        fechaMeta: datos.fechaMeta || null,
-        actualizado: new Date().toISOString()
+        fechaMeta: datos.fechaMeta || null
     };
 
+    const boton = form.querySelector('button[type="submit"]');
+    boton.disabled = true;
+    saveStatus.textContent = "Guardando…";
+
     try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(situacion));
-        saveStatus.textContent = `Guardado el ${formatearFecha(situacion.actualizado)}`;
+        const respuesta = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(situacion)
+        });
+        const resultado = await respuesta.json();
+
+        if (respuesta.status === 422) {
+            mostrarErroresServidor(resultado.errores);
+            return;
+        }
+        if (!respuesta.ok) {
+            throw new Error(resultado.error);
+        }
+
+        saveStatus.textContent = `Guardado el ${formatearFecha(resultado.situacion.actualizado)}`;
     } catch {
-        saveStatus.textContent = "No se pudo guardar en este navegador.";
+        saveStatus.textContent = "No se pudo guardar. Revisá tu conexión e intentá de nuevo.";
+    } finally {
+        boton.disabled = false;
     }
 });
 
+function mostrarErroresServidor(errores) {
+    let primerCampo = null;
+
+    Object.entries(errores).forEach(([clave, mensaje]) => {
+        const [idError, nombreCampo] = ERRORES_SERVIDOR[clave] ?? [];
+        if (!idError) return;
+
+        const campo = nombreCampo ? form[nombreCampo] : null;
+        mostrarError(idError, campo, mensaje);
+        primerCampo ??= campo ?? form.querySelector('input[name="tipoTrabajo"]');
+    });
+
+    saveStatus.textContent = "Revisá los campos marcados.";
+    primerCampo?.focus();
+}
+
 crearCuadricula();
 crearOpcionesMeta();
-cargarGuardado();
 actualizarResumen();
+cargarGuardado().then(actualizarResumen);
