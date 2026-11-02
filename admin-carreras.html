@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Carreras | Administración UniPath</title>
+
+    <link
+        rel="stylesheet"
+        href="css/componentes.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
+
+    <script src="js/componentes.js" defer></script>
+    <script src="js/admin-api.js" defer></script>
+    <script src="js/admin-carreras.js" defer></script>
+</head>
+
+<body class="up-demo">
+
+    <div class="up-admin">
+
+        <aside class="up-admin-lateral">
+
+            <img
+                src="assets/logo-unipath.png"
+                alt="UniPath"
+            >
+
+            <p class="up-admin-rol">
+                ADMINISTRADOR
+            </p>
+
+            <nav
+                class="up-admin-nav"
+                aria-label="Administración"
+            >
+                <a
+                    href="admin-carreras.html"
+                    aria-current="page"
+                >
+                    Carreras
+                </a>
+
+                <a href="admin-acceso.html">
+                    Mi sesión
+                </a>
+            </nav>
+
+            <button
+                id="cerrarSesion"
+                class="up-boton up-boton-peligro up-admin-salir"
+                type="button"
+                disabled
+            >
+                Cerrar sesión
+            </button>
+
+        </aside>
+
+        <main class="up-admin-main">
+
+            <header class="up-admin-topbar">
+
+                <span>
+                    UniPath / Administración / Carreras
+                </span>
+
+                <span id="nombreAdmin"></span>
+
+            </header>
+
+            <section
+                id="avisoAcceso"
+                class="up-tarjeta"
+                aria-label="Acceso"
+            >
+                <p
+                    id="textoAcceso"
+                    role="status"
+                >
+                    Comprobando sesión...
+                </p>
+
+                <a href="admin-acceso.html">
+                    Ir al acceso de administración
+                </a>
+            </section>
+
+            <div id="contenidoAdmin" hidden>
+
+                <div class="up-admin-hero">
+
+                    <div>
+                        <h1>Carreras</h1>
+
+                        <p class="up-nota">
+                            Gestioná las carreras y la duración
+                            de sus planes de estudio.
+                        </p>
+                    </div>
+
+                    <div class="up-acciones">
+
+                        <button
+                            id="actualizar"
+                            class="up-boton"
+                            type="button"
+                        >
+                            Actualizar
+                        </button>
+
+                        <button
+                            id="nuevaCarrera"
+                            class="up-boton up-boton-primario"
+                            type="button"
+                            disabled
+                        >
+                            Agregar carrera
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="up-admin-resumen">
+
+                    <section class="up-tarjeta">
+                        <p>Carreras registradas</p>
+                        <strong id="totalCarreras">0</strong>
+                    </section>
+
+                    <section class="up-tarjeta">
+                        <p>Activas</p>
+                        <strong id="totalActivas">0</strong>
+                    </section>
+
+                    <section class="up-tarjeta">
+                        <p>Inactivas</p>
+                        <strong id="totalInactivas">0</strong>
+                    </section>
+
+                </div>
+
+                <p
+                    id="mensajeCarreras"
+                    class="up-admin-aviso"
+                    role="status"
+                    hidden
+                ></p>
+
+                <section
+                    class="up-tarjeta"
+                    aria-label="Listado de carreras"
+                >
+
+                    <div class="up-admin-filtros">
+
+                        <label>
+                            Universidad
+
+                            <select
+                                id="filtroUniversidad"
+                                class="up-campo"
+                            >
+                                <option value="">
+                                    Todas las universidades
+                                </option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Estado
+
+                            <select
+                                id="filtroEstado"
+                                class="up-campo"
+                            >
+                                <option value="">
+                                    Todos los estados
+                                </option>
+
+                                <option value="activa">
+                                    Activas
+                                </option>
+
+                                <option value="inactiva">
+                                    Inactivas
+                                </option>
+                            </select>
+                        </label>
+
+                    </div>
+
+                    <div id="tablaCarreras"></div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
