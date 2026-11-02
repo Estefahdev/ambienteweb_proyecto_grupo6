@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registrá tu trabajo, horario, horas y presupuesto para que UniPath genere rutas a tu medida.">
+
+    <title>Situación personal | UniPath</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/planificacion.css">
+    <script src="js/situacion-personal.js" defer></script>
+</head>
+
+<body class="app-body">
+
+    <aside class="sidebar" id="sidebar">
+
+        <a class="brand" href="index.html" aria-label="UniPath, ir al inicio">
+            <img src="assets/logo-unipath.png" alt="UniPath">
+            <span>Tu camino universitario,<br>más claro.</span>
+        </a>
+
+        <nav class="side-nav" aria-label="Navegación principal">
+            <a class="nav-link" href="index.html">Panel principal</a>
+            <a class="nav-link" href="perfil-academico.html">Perfil académico</a>
+            <a class="nav-link" href="plan-estudios.html">Plan de estudios</a>
+            <a class="nav-link active" href="situacion-personal.html" aria-current="page">Situación personal</a>
+            <a class="nav-link" href="generador-rutas.html">Generador de rutas</a>
+            <a class="nav-link" href="mis-rutas.html">Mis rutas</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a class="nav-link" href="login.html">Cerrar sesión</a>
+        </div>
+
+    </aside>
+
+    <main class="main-area plan-page">
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu"
+                id="menuButton"
+                type="button"
+                aria-label="Abrir menú"
+                aria-controls="sidebar"
+                aria-expanded="false">
+                Menú
+            </button>
+
+            <label class="search">
+                <span class="search-label">Buscar</span>
+                <input
+                    type="search"
+                    placeholder="Buscar materias, códigos o rutas..."
+                    aria-label="Buscar materias, códigos o rutas">
+            </label>
+
+            <div class="user-area">
+                <span class="avatar" aria-hidden="true"></span>
+                <a href="perfil-academico.html">Mi cuenta</a>
+            </div>
+
+        </header>
+
+        <div class="plan-heading">
+            <h1>Situación personal</h1>
+            <p>
+                Con estos datos el generador arma rutas que caben en tu semana
+                y en tu presupuesto.
+            </p>
+        </div>
+
+        <div class="plan-layout">
+
+            <form class="plan-form" id="situacionForm" novalidate>
+
+                <!-- 1. Trabajo -->
+                <section class="plan-card" aria-labelledby="trabajoTitulo">
+                    <div class="card-head">
+                        <h2 id="trabajoTitulo">¿Trabajás actualmente?</h2>
+                        <p>Define cuánta carga académica es realista para vos.</p>
+                    </div>
+
+                    <div class="choice-grid" role="radiogroup" aria-describedby="trabajoError">
+                        <label class="choice">
+                            <input type="radio" name="tipoTrabajo" value="no">
+                            <span class="choice-title">No trabajo</span>
+                            <span class="choice-text">Tiempo completo para estudiar.</span>
+                        </label>
+
+                        <label class="choice">
+                            <input type="radio" name="tipoTrabajo" value="medio_tiempo">
+                            <span class="choice-title">Medio tiempo</span>
+                            <span class="choice-text">Entre 20 y 25 horas por semana.</span>
+                        </label>
+
+                        <label class="choice">
+                            <input type="radio" name="tipoTrabajo" value="tiempo_completo">
+                            <span class="choice-title">Tiempo completo</span>
+                            <span class="choice-text">40 horas o más por semana.</span>
+                        </label>
+                    </div>
+
+                    <p class="field-error" id="trabajoError" hidden></p>
+                </section>
+
+                <!-- 2. Horario laboral -->
+                <section class="plan-card" aria-labelledby="horarioTitulo">
+                    <div class="card-head">
+                        <h2 id="horarioTitulo">Horario laboral</h2>
+                        <p>Marcá los bloques en los que trabajás. Ahí no se van a acomodar clases.</p>
+                    </div>
+
+                    <div class="schedule-wrap">
+                        <table class="schedule">
+                            <caption class="sr-only">Bloques de trabajo por día y jornada</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col"><span class="sr-only">Jornada</span></th>
+                                    <th scope="col"><abbr title="Lunes">Lun</abbr></th>
+                                    <th scope="col"><abbr title="Martes">Mar</abbr></th>
+                                    <th scope="col"><abbr title="Miércoles">Mié</abbr></th>
+                                    <th scope="col"><abbr title="Jueves">Jue</abbr></th>
+                                    <th scope="col"><abbr title="Viernes">Vie</abbr></th>
+                                    <th scope="col"><abbr title="Sábado">Sáb</abbr></th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleBody">
+                                <!-- Las celdas se generan en situacion-personal.js -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="card-note" id="horarioResumen">Ningún bloque marcado.</p>
+                </section>
+
+                <!-- 3. Horas y presupuesto -->
+                <section class="plan-card" aria-labelledby="recursosTitulo">
+                    <div class="card-head">
+                        <h2 id="recursosTitulo">Tiempo y presupuesto</h2>
+                        <p>Lo que podés dedicarle a la universidad cada cuatrimestre.</p>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="horasDisponibles">Horas de estudio por semana</label>
+                            <div class="input-affix">
+                                <input
+                                    type="number"
+                                    id="horasDisponibles"
+                                    name="horasDisponibles"
+                                    min="1"
+                                    max="60"
+                                    step="1"
+                                    inputmode="numeric"
+                                    aria-describedby="horasAyuda horasError">
+                                <span class="affix" aria-hidden="true">h</span>
+                            </div>
+                            <p class="field-help" id="horasAyuda">Fuera de clases. Entre 1 y 60 horas.</p>
+                            <p class="field-error" id="horasError" hidden></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="presupuesto">Presupuesto por cuatrimestre</label>
+                            <div class="input-affix">
+                                <span class="affix" aria-hidden="true">₡</span>
+                                <input
+                                    type="number"
+                                    id="presupuesto"
+                                    name="presupuesto"
+                                    min="1"
+                                    step="1000"
+                                    inputmode="numeric"
+                                    aria-describedby="presupuestoAyuda presupuestoError">
+                            </div>
+                            <p class="field-help" id="presupuestoAyuda">En colones, para matrícula y materias.</p>
+                            <p class="field-error" id="presupuestoError" hidden></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Preferencias -->
+                <section class="plan-card" aria-labelledby="preferenciasTitulo">
+                    <div class="card-head">
+                        <h2 id="preferenciasTitulo">Preferencias de ruta</h2>
+                        <p>Los límites que el generador no va a pasar.</p>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="maxMaterias">Máximo de materias por cuatrimestre</label>
+                            <select id="maxMaterias" name="maxMaterias" aria-describedby="maxMateriasError">
+                                <option value="">Elegí una cantidad</option>
+                                <option value="1">1 materia</option>
+                                <option value="2">2 materias</option>
+                                <option value="3">3 materias</option>
+                                <option value="4">4 materias</option>
+                                <option value="5">5 materias</option>
+                                <option value="6">6 materias</option>
+                            </select>
+                            <p class="field-error" id="maxMateriasError" hidden></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="fechaMeta">
+                                Meta de graduación <span class="optional">(opcional)</span>
+                            </label>
+                            <select id="fechaMeta" name="fechaMeta" aria-describedby="fechaMetaAyuda fechaMetaError">
+                                <option value="">Sin fecha meta</option>
+                                <!-- Los cuatrimestres futuros se generan en situacion-personal.js -->
+                            </select>
+                            <p class="field-help" id="fechaMetaAyuda">El cuatrimestre en el que querés terminar.</p>
+                            <p class="field-error" id="fechaMetaError" hidden></p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
+                    <a class="button-secondary" href="index.html">Cancelar</a>
+                    <button class="button-primary" type="submit">Guardar situación personal</button>
+                </div>
+
+            </form>
+
+            <!-- Resumen que se actualiza mientras se llena el formulario -->
+            <aside class="plan-summary" aria-labelledby="resumenTitulo">
+                <h2 id="resumenTitulo">Lo que va a usar el generador</h2>
+
+                <dl class="summary-list">
+                    <div>
+                        <dt>Trabajo</dt>
+                        <dd id="resTrabajo">—</dd>
+                    </div>
+                    <div>
+                        <dt>Bloques ocupados</dt>
+                        <dd id="resBloques">0 de 18</dd>
+                    </div>
+                    <div>
+                        <dt>Horas de estudio</dt>
+                        <dd id="resHoras">—</dd>
+                    </div>
+                    <div>
+                        <dt>Presupuesto</dt>
+                        <dd id="resPresupuesto">—</dd>
+                    </div>
+                    <div>
+                        <dt>Materias por cuatrimestre</dt>
+                        <dd id="resMaterias">—</dd>
+                    </div>
+                    <div>
+                        <dt>Meta</dt>
+                        <dd id="resMeta">Sin fecha meta</dd>
+                    </div>
+                </dl>
+
+                <p class="summary-finding" id="resHallazgo" hidden></p>
+
+                <a class="summary-link" href="generador-rutas.html">Ir al generador de rutas</a>
+            </aside>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
