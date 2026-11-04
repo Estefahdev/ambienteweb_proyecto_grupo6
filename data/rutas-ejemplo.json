@@ -1,0 +1,99 @@
+{
+  "rutas": [
+    {
+      "id": 1,
+      "nombre": "Ruta equilibrada",
+      "tipo": "equilibrada",
+      "recomendadaIa": true,
+      "explicacionIa": "Mantiene 3 materias por cuatrimestre, cerca de tus horas disponibles y de tu presupuesto.",
+      "fechaCreacion": "2026-11-02",
+      "metricas": {"cuatrimestres": 4, "periodoGraduacion": "2028-1", "horasPromedio": 15.3, "costoTotal": 1320000, "costoPromedio": 330000, "materiasMin": 3, "materiasMax": 3},
+      "periodos": [
+        { "periodo": "2027-1", "horas": 16, "costo": 360000, "creditos": 12, "materias": [
+          {"codigo": "SC-601", "nombre": "Programación web avanzada", "creditos": 4, "horasSemanales": 6, "costo": 120000},
+          {"codigo": "SC-602", "nombre": "Redes II", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-603", "nombre": "Ingeniería de software II", "creditos": 4, "horasSemanales": 5, "costo": 120000}
+        ] },
+        { "periodo": "2027-2", "horas": 15, "costo": 330000, "creditos": 11, "materias": [
+          {"codigo": "SC-701", "nombre": "Seguridad informática", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-702", "nombre": "Computación en la nube", "creditos": 4, "horasSemanales": 6, "costo": 120000},
+          {"codigo": "SC-703", "nombre": "Gestión de proyectos", "creditos": 3, "horasSemanales": 4, "costo": 90000}
+        ] },
+        { "periodo": "2027-3", "horas": 18, "costo": 330000, "creditos": 11, "materias": [
+          {"codigo": "SC-901", "nombre": "Auditoría de sistemas", "creditos": 3, "horasSemanales": 4, "costo": 90000},
+          {"codigo": "SC-902", "nombre": "Proyecto de graduación", "creditos": 4, "horasSemanales": 8, "costo": 120000},
+          {"codigo": "SC-801", "nombre": "Inteligencia artificial", "creditos": 4, "horasSemanales": 6, "costo": 120000}
+        ] },
+        { "periodo": "2028-1", "horas": 12, "costo": 300000, "creditos": 10, "materias": [
+          {"codigo": "SC-802", "nombre": "Aplicaciones móviles", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-903", "nombre": "Calidad de software", "creditos": 3, "horasSemanales": 4, "costo": 90000},
+          {"codigo": "EG-801", "nombre": "Ética profesional", "creditos": 3, "horasSemanales": 3, "costo": 90000}
+        ] }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Ruta rápida",
+      "tipo": "rapida",
+      "recomendadaIa": false,
+      "explicacionIa": "Terminás un cuatrimestre antes, pero con 4 materias por período la carga y el costo suben.",
+      "fechaCreacion": "2026-11-02",
+      "metricas": {"cuatrimestres": 3, "periodoGraduacion": "2027-3", "horasPromedio": 20.3, "costoTotal": 1320000, "costoPromedio": 440000, "materiasMin": 4, "materiasMax": 4},
+      "periodos": [
+        { "periodo": "2027-1", "horas": 22, "costo": 480000, "creditos": 16, "materias": [
+          {"codigo": "SC-601", "nombre": "Programación web avanzada", "creditos": 4, "horasSemanales": 6, "costo": 120000},
+          {"codigo": "SC-602", "nombre": "Redes II", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-603", "nombre": "Ingeniería de software II", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-801", "nombre": "Inteligencia artificial", "creditos": 4, "horasSemanales": 6, "costo": 120000}
+        ] },
+        { "periodo": "2027-2", "horas": 20, "costo": 450000, "creditos": 15, "materias": [
+          {"codigo": "SC-701", "nombre": "Seguridad informática", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-702", "nombre": "Computación en la nube", "creditos": 4, "horasSemanales": 6, "costo": 120000},
+          {"codigo": "SC-703", "nombre": "Gestión de proyectos", "creditos": 3, "horasSemanales": 4, "costo": 90000},
+          {"codigo": "SC-802", "nombre": "Aplicaciones móviles", "creditos": 4, "horasSemanales": 5, "costo": 120000}
+        ] },
+        { "periodo": "2027-3", "horas": 19, "costo": 390000, "creditos": 13, "materias": [
+          {"codigo": "SC-901", "nombre": "Auditoría de sistemas", "creditos": 3, "horasSemanales": 4, "costo": 90000},
+          {"codigo": "SC-902", "nombre": "Proyecto de graduación", "creditos": 4, "horasSemanales": 8, "costo": 120000},
+          {"codigo": "SC-903", "nombre": "Calidad de software", "creditos": 3, "horasSemanales": 4, "costo": 90000},
+          {"codigo": "EG-801", "nombre": "Ética profesional", "creditos": 3, "horasSemanales": 3, "costo": 90000}
+        ] }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Ruta ligera",
+      "tipo": "ligera",
+      "recomendadaIa": false,
+      "explicacionIa": "Con 2 materias por período te queda más tiempo libre, a cambio de dos cuatrimestres más que la equilibrada.",
+      "fechaCreacion": "2026-11-01",
+      "metricas": {"cuatrimestres": 6, "periodoGraduacion": "2028-3", "horasPromedio": 10.2, "costoTotal": 1320000, "costoPromedio": 220000, "materiasMin": 2, "materiasMax": 2},
+      "periodos": [
+        { "periodo": "2027-1", "horas": 11, "costo": 240000, "creditos": 8, "materias": [
+          {"codigo": "SC-601", "nombre": "Programación web avanzada", "creditos": 4, "horasSemanales": 6, "costo": 120000},
+          {"codigo": "SC-602", "nombre": "Redes II", "creditos": 4, "horasSemanales": 5, "costo": 120000}
+        ] },
+        { "periodo": "2027-2", "horas": 11, "costo": 240000, "creditos": 8, "materias": [
+          {"codigo": "SC-603", "nombre": "Ingeniería de software II", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-702", "nombre": "Computación en la nube", "creditos": 4, "horasSemanales": 6, "costo": 120000}
+        ] },
+        { "periodo": "2027-3", "horas": 9, "costo": 210000, "creditos": 7, "materias": [
+          {"codigo": "SC-701", "nombre": "Seguridad informática", "creditos": 4, "horasSemanales": 5, "costo": 120000},
+          {"codigo": "SC-703", "nombre": "Gestión de proyectos", "creditos": 3, "horasSemanales": 4, "costo": 90000}
+        ] },
+        { "periodo": "2028-1", "horas": 12, "costo": 210000, "creditos": 7, "materias": [
+          {"codigo": "SC-902", "nombre": "Proyecto de graduación", "creditos": 4, "horasSemanales": 8, "costo": 120000},
+          {"codigo": "SC-901", "nombre": "Auditoría de sistemas", "creditos": 3, "horasSemanales": 4, "costo": 90000}
+        ] },
+        { "periodo": "2028-2", "horas": 11, "costo": 240000, "creditos": 8, "materias": [
+          {"codigo": "SC-801", "nombre": "Inteligencia artificial", "creditos": 4, "horasSemanales": 6, "costo": 120000},
+          {"codigo": "SC-802", "nombre": "Aplicaciones móviles", "creditos": 4, "horasSemanales": 5, "costo": 120000}
+        ] },
+        { "periodo": "2028-3", "horas": 7, "costo": 180000, "creditos": 6, "materias": [
+          {"codigo": "SC-903", "nombre": "Calidad de software", "creditos": 3, "horasSemanales": 4, "costo": 90000},
+          {"codigo": "EG-801", "nombre": "Ética profesional", "creditos": 3, "horasSemanales": 3, "costo": 90000}
+        ] }
+      ]
+    }
+  ]
+}
