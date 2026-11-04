@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compará rutas hacia tu graduación que respetan los prerrequisitos de tu plan de estudios.">
+
+    <title>Generador de rutas | UniPath</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/planificacion.css">
+    <script src="js/rutas-comun.js" defer></script>
+    <script src="js/generador-rutas.js" defer></script>
+</head>
+
+<body class="app-body">
+
+    <aside class="sidebar" id="sidebar">
+
+        <a class="brand" href="index.html" aria-label="UniPath, ir al inicio">
+            <img src="assets/logo-unipath.png" alt="UniPath">
+            <span>Tu camino universitario,<br>más claro.</span>
+        </a>
+
+        <nav class="side-nav" aria-label="Navegación principal">
+            <a class="nav-link" href="index.html">Panel principal</a>
+            <a class="nav-link" href="perfilAcademico.html">Perfil académico</a>
+            <a class="nav-link" href="plan-estudios.html">Plan de estudios</a>
+            <a class="nav-link" href="situacion-personal.html">Situación personal</a>
+            <a class="nav-link active" href="generador-rutas.html" aria-current="page">Generador de rutas</a>
+            <a class="nav-link" href="mis-rutas.html">Mis rutas</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a class="nav-link" href="login.html">Cerrar sesión</a>
+        </div>
+
+    </aside>
+
+    <main class="main-area plan-page">
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu"
+                id="menuButton"
+                type="button"
+                aria-label="Abrir menú"
+                aria-controls="sidebar"
+                aria-expanded="false">
+                Menú
+            </button>
+
+            <label class="search">
+                <span class="search-label">Buscar</span>
+                <input
+                    type="search"
+                    placeholder="Buscar materias, códigos o rutas..."
+                    aria-label="Buscar materias, códigos o rutas">
+            </label>
+
+            <div class="user-area">
+                <span class="avatar" aria-hidden="true"></span>
+                <a href="perfilAcademico.html">Mi cuenta</a>
+            </div>
+
+        </header>
+
+        <div class="plan-heading">
+            <h1>Generador de rutas</h1>
+            <p>
+                Compará caminos hacia tu graduación y elegí el que mejor calza
+                con tu semana.
+            </p>
+        </div>
+
+        <section class="plan-card condiciones" aria-labelledby="condicionesTitulo">
+            <div class="condiciones-head">
+                <div>
+                    <h2 id="condicionesTitulo">Tus condiciones actuales</h2>
+                    <a class="enlace" href="situacion-personal.html">Editar situación personal</a>
+                </div>
+                <button class="button-primary" id="generarBoton" type="button">Generar rutas</button>
+            </div>
+
+            <dl class="condiciones-lista" id="condicionesLista">
+                <div><dt>Horas de estudio</dt><dd id="condHoras">—</dd></div>
+                <div><dt>Presupuesto</dt><dd id="condPresupuesto">—</dd></div>
+                <div><dt>Máximo de materias</dt><dd id="condMaterias">—</dd></div>
+                <div><dt>Meta de graduación</dt><dd id="condMeta">—</dd></div>
+            </dl>
+
+            <p class="card-note" id="condicionesAviso" role="status" hidden></p>
+        </section>
+
+        <section class="rutas-seccion" aria-labelledby="rutasTitulo">
+            <h2 id="rutasTitulo">Rutas sugeridas</h2>
+
+            <p class="estado-vacio" id="rutasVacio">
+                Tocá “Generar rutas” para ver tus opciones.
+            </p>
+
+            <div class="rutas-grid" id="rutasGrid" hidden></div>
+
+            <p class="rutas-nota" id="rutasNota" hidden>
+                Todas las rutas respetan los prerrequisitos del plan de estudios.
+            </p>
+        </section>
+
+        <section class="plan-card detalle" id="detalleSeccion" aria-labelledby="detalleTitulo" tabindex="-1" hidden>
+            <div class="card-head">
+                <h2 id="detalleTitulo">Detalle</h2>
+                <p id="detalleResumen"></p>
+            </div>
+            <div class="periodos-grid" id="detallePeriodos"></div>
+        </section>
+
+    </main>
+
+</body>
+</html>

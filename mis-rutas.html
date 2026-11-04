@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Administrá, compará y activá tus rutas académicas guardadas.">
+
+    <title>Mis rutas | UniPath</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/planificacion.css">
+    <script src="js/rutas-comun.js" defer></script>
+    <script src="js/mis-rutas.js" defer></script>
+</head>
+
+<body class="app-body">
+
+    <aside class="sidebar" id="sidebar">
+
+        <a class="brand" href="index.html" aria-label="UniPath, ir al inicio">
+            <img src="assets/logo-unipath.png" alt="UniPath">
+            <span>Tu camino universitario,<br>más claro.</span>
+        </a>
+
+        <nav class="side-nav" aria-label="Navegación principal">
+            <a class="nav-link" href="index.html">Panel principal</a>
+            <a class="nav-link" href="perfilAcademico.html">Perfil académico</a>
+            <a class="nav-link" href="plan-estudios.html">Plan de estudios</a>
+            <a class="nav-link" href="situacion-personal.html">Situación personal</a>
+            <a class="nav-link" href="generador-rutas.html">Generador de rutas</a>
+            <a class="nav-link active" href="mis-rutas.html" aria-current="page">Mis rutas</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a class="nav-link" href="login.html">Cerrar sesión</a>
+        </div>
+
+    </aside>
+
+    <main class="main-area plan-page">
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu"
+                id="menuButton"
+                type="button"
+                aria-label="Abrir menú"
+                aria-controls="sidebar"
+                aria-expanded="false">
+                Menú
+            </button>
+
+            <label class="search">
+                <span class="search-label">Buscar</span>
+                <input
+                    type="search"
+                    placeholder="Buscar materias, códigos o rutas..."
+                    aria-label="Buscar materias, códigos o rutas">
+            </label>
+
+            <div class="user-area">
+                <span class="avatar" aria-hidden="true"></span>
+                <a href="perfilAcademico.html">Mi cuenta</a>
+            </div>
+
+        </header>
+
+        <div class="plan-heading plan-heading-accion">
+            <div>
+                <h1>Mis rutas</h1>
+                <p>Compará tus rutas guardadas y elegí la que guía tu avance.</p>
+            </div>
+            <a class="button-primary" href="generador-rutas.html">Generar nuevas rutas</a>
+        </div>
+
+        <p class="estado-vacio" id="misRutasVacio" hidden>
+            Todavía no tenés rutas guardadas.
+            <a class="enlace" href="generador-rutas.html">Ir al generador</a>
+        </p>
+
+        <div class="mis-rutas-layout" id="misRutasContenido">
+
+            <section class="mis-rutas-lista" aria-labelledby="guardadasTitulo">
+                <div class="lista-head">
+                    <h2 id="guardadasTitulo">Rutas guardadas</h2>
+                    <p>Elegí hasta 2 para comparar.</p>
+                </div>
+                <ul class="rutas-lista" id="rutasLista"></ul>
+            </section>
+
+            <div class="mis-rutas-detalle">
+
+                <section class="plan-card" aria-labelledby="comparativaTitulo">
+                    <div class="card-head">
+                        <h2 id="comparativaTitulo">Comparativa</h2>
+                        <p id="comparativaAviso"></p>
+                    </div>
+                    <div class="tabla-wrap" id="comparativa"></div>
+                </section>
+
+                <section class="plan-card" aria-labelledby="desgloseTitulo">
+                    <div class="desglose-head">
+                        <div>
+                            <h2 id="desgloseTitulo">Desglose</h2>
+                            <p id="desgloseResumen"></p>
+                        </div>
+                        <div class="desglose-acciones">
+                            <button class="button-secondary" id="activarBoton" type="button">Marcar como activa</button>
+                            <button class="button-peligro" id="eliminarBoton" type="button">Eliminar</button>
+                        </div>
+                    </div>
+                    <div class="periodos-grid" id="desglosePeriodos"></div>
+                </section>
+
+            </div>
+        </div>
+
+        <dialog class="confirmar" id="confirmarDialogo" aria-labelledby="confirmarTitulo">
+            <form method="dialog">
+                <h2 id="confirmarTitulo">¿Eliminar esta ruta?</h2>
+                <p id="confirmarTexto"></p>
+                <div class="confirmar-acciones">
+                    <button class="button-secondary" value="cancelar">Cancelar</button>
+                    <button class="button-peligro" value="eliminar">Eliminar ruta</button>
+                </div>
+            </form>
+        </dialog>
+
+    </main>
+
+</body>
+</html>

@@ -533,3 +533,488 @@
         transition: none;
     }
 }
+
+
+
+/* ==========================================
+   COMPONENTES COMPARTIDOS DE RUTAS
+========================================== */
+
+.badge {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-teal {
+    background: var(--mint-bg);
+    color: #17664F;
+}
+
+.badge-ambar {
+    background: #FDF3DC;
+    color: #7A5200;
+}
+
+.badge-azul {
+    background: var(--blue-bg);
+    color: var(--primary);
+}
+
+.enlace {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.estado-vacio {
+    padding: 28px 24px;
+    border: 1px dashed #C9D6DE;
+    border-radius: var(--radius);
+    color: #4F5D6A;
+    text-align: center;
+}
+
+.button-primary:disabled,
+.button-secondary:disabled {
+    background: var(--gray-bg);
+    color: #5B6975;
+    cursor: not-allowed;
+}
+
+.button-peligro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 0 18px;
+
+    border: 1px solid var(--danger);
+    border-radius: 8px;
+    background: var(--surface);
+
+    color: #B5423D;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.button-peligro:hover {
+    background: #FBEEED;
+}
+
+.periodos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.periodo {
+    padding: 16px;
+    border-radius: 8px;
+    background: var(--background);
+}
+
+.periodo h3 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.periodo-materias {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+    font-size: 13px;
+}
+
+.periodo-materias li {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 8px;
+}
+
+.materia-codigo {
+    color: #4F5D6A;
+    font-variant-numeric: tabular-nums;
+}
+
+.periodo-resumen {
+    margin-top: 12px;
+    color: #4F5D6A;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================
+   GENERADOR DE RUTAS
+========================================== */
+
+.condiciones {
+    margin-bottom: 28px;
+}
+
+.condiciones-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.condiciones-head h2 {
+    margin-bottom: 2px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.condiciones-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 16px;
+}
+
+.condiciones-lista dt {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.condiciones-lista dd {
+    font-size: 16px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.rutas-seccion {
+    margin-bottom: 28px;
+}
+
+.rutas-seccion > h2 {
+    margin-bottom: 14px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.rutas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.ruta-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.ruta-card.is-recomendada {
+    border-color: var(--primary);
+    box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.ruta-card h3 {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.ruta-metricas {
+    width: 100%;
+}
+
+.ruta-metricas div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.ruta-metricas dt {
+    color: var(--text-secondary);
+}
+
+.ruta-metricas dd {
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.carga {
+    width: 100%;
+}
+
+.carga p {
+    margin-bottom: 6px;
+    color: #4F5D6A;
+    font-size: 13px;
+}
+
+.carga-barra {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--gray-bg);
+}
+
+.carga-barra span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--secondary);
+}
+
+.carga-barra span.is-alta {
+    background: var(--accent);
+}
+
+.ruta-explicacion {
+    flex: 1;
+    color: #4F5D6A;
+}
+
+.ruta-acciones {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+}
+
+.rutas-nota {
+    margin-top: 14px;
+    color: #4F5D6A;
+    font-size: 13px;
+}
+
+.detalle:focus {
+    outline: none;
+}
+
+/* ==========================================
+   MIS RUTAS
+========================================== */
+
+.plan-heading-accion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: none;
+}
+
+.mis-rutas-layout {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    align-items: start;
+    gap: 20px;
+}
+
+.mis-rutas-detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.lista-head {
+    margin-bottom: 12px;
+}
+
+.lista-head h2 {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.lista-head p {
+    color: #4F5D6A;
+    font-size: 13px;
+}
+
+.rutas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.ruta-fila {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+}
+
+.ruta-fila.is-seleccionada {
+    border-color: var(--primary);
+    background: var(--blue-bg);
+}
+
+.ruta-fila input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--primary);
+}
+
+.ruta-fila-boton {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ruta-fila-titulo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.ruta-fila-datos {
+    color: #4F5D6A;
+    font-size: 13px;
+}
+
+.tabla-wrap {
+    overflow-x: auto;
+}
+
+.comparativa {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comparativa th,
+.comparativa td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+.comparativa thead th {
+    font-weight: 600;
+}
+
+.comparativa tbody th {
+    color: #4F5D6A;
+    font-weight: 500;
+}
+
+.comparativa tbody tr:last-child th,
+.comparativa tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.comparativa thead th:not(:first-child),
+.comparativa td {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.comparativa .mejor {
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--mint-bg);
+    color: #17664F;
+    font-weight: 600;
+}
+
+.desglose-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.desglose-head h2 {
+    margin-bottom: 4px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.desglose-head p {
+    color: var(--text-secondary);
+}
+
+.desglose-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.confirmar {
+    width: min(420px, calc(100vw - 32px));
+    margin: auto;
+    padding: 24px;
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgba(31, 41, 51, 0.18);
+    color: var(--text);
+}
+
+.confirmar::backdrop {
+    background: rgba(31, 41, 51, 0.4);
+}
+
+.confirmar h2 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.confirmar-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1150px) {
+    .mis-rutas-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+    .ruta-card {
+        padding: 16px;
+    }
+
+    .desglose-acciones,
+    .desglose-acciones button {
+        width: 100%;
+    }
+}
