@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acceso de administración | UniPath</title>
+
+    <link rel="stylesheet" href="css/componentes.css">
+
+    <script src="js/admin-acceso.js" defer></script>
+</head>
+
+<body class="up-demo">
+
+    <main class="up-pagina up-acceso">
+
+        <section class="up-tarjeta">
+
+            <img src="assets/logo-unipath.png" alt="UniPath">
+
+            <h1>Administración</h1>
+
+            <p id="mensaje" class="up-error" role="alert" hidden></p>
+
+            <form id="formAcceso">
+
+                <p class="up-nota">
+                    Ingresá con tu cuenta administradora.
+                </p>
+
+                <label>
+                    Correo electrónico
+
+                    <input class="up-campo" type="email" name="correo" autocomplete="username" maxlength="150" required>
+                </label>
+
+                <label>
+                    Contraseña
+
+                    <input class="up-campo" type="password" name="contrasena" autocomplete="current-password"
+                        maxlength="1024" required>
+                </label>
+
+                <button id="ingresar" class="up-boton up-boton-primario" type="submit" disabled>
+                    Ingresar
+                </button>
+
+            </form>
+
+            <div id="sesionActiva" hidden>
+
+                <p id="bienvenida" role="status"></p>
+
+                <p class="up-nota">
+                    Tu sesión de administración está activa.
+                </p>
+                <a href="admin-carreras.html" class="up-boton up-boton-primario up-enlace-boton">
+                    Administrar carreras
+                </a>
+                <button id="salir" class="up-boton" type="button">
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
