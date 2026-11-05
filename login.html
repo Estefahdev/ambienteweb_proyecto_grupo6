@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,29 +20,33 @@
 
     <main class="auth-shell">
 
-        <section class="auth-brand" aria-label="Presentación de UniPath">
+        <!-- PANEL IZQUIERDO -->
+       <section class="auth-brand" aria-label="Presentación de UniPath">
 
-            <a class="auth-logo" href="index.html" aria-label="Volver al panel principal">
-                <img src="assets/Logotipo UniPath con ícono de conexión.png" alt="UniPath">
-            </a>
+    <a class="auth-logo" href="index.html" aria-label="Volver al inicio">
+        <img src="assets/Logotipo UniPath con ícono de conexión.png" alt="UniPath">
+    </a>
 
-            <div class="brand-copy">
-                <p class="eyebrow">TU CAMINO UNIVERSITARIO</p>
+    <div class="brand-copy">
 
-                <h1>Tu camino universitario,<br>más claro.</h1>
+        <p class="eyebrow">TU CAMINO UNIVERSITARIO</p>
 
-                <p class="brand-description">
-                    Organiza tus materias, descubre tu ruta y acércate
-                    a tu meta de graduación.
-                </p>
-            </div>
+        <h1>Tu camino universitario,<br>más claro.</h1>
 
-            <div class="brand-footer">
-                Planifica tu futuro académico con UniPath.
-            </div>
+        <p class="brand-description">
+            Organiza tus materias, descubre tu ruta y acércate
+            a tu meta de graduación.
+        </p>
 
-        </section>
+    </div>
 
+    <div class="brand-footer">
+        Planifica tu futuro académico con UniPath.
+    </div>
+
+</section>
+
+        <!-- PANEL DERECHO -->
         <section class="auth-content">
 
             <div class="auth-card">
@@ -62,10 +67,15 @@
 
                 </div>
 
+
+                <!-- FORMULARIO -->
                 <form id="loginForm">
 
                     <div class="form-group">
-                        <label for="email">Correo electrónico</label>
+
+                        <label for="email">
+                            Correo electrónico
+                        </label>
 
                         <input
                             type="email"
@@ -73,11 +83,17 @@
                             name="email"
                             placeholder="tu@universidad.ac.cr"
                             autocomplete="email"
+                            maxlength="254"
                             required>
+
                     </div>
 
+
                     <div class="form-group">
-                        <label for="password">Contraseña</label>
+
+                        <label for="password">
+                            Contraseña
+                        </label>
 
                         <input
                             type="password"
@@ -87,17 +103,21 @@
                             autocomplete="current-password"
                             minlength="6"
                             required>
+
                     </div>
+
 
                     <div class="form-options">
 
                         <label class="check-label" for="remember">
+
                             <input
                                 type="checkbox"
                                 id="remember"
                                 name="remember">
 
                             <span>Recordarme</span>
+
                         </label>
 
                         <a href="#" id="forgotLink">
@@ -106,9 +126,11 @@
 
                     </div>
 
+
                     <button class="primary-button" type="submit">
                         Ingresar a UniPath
                     </button>
+
 
                     <p
                         class="form-message"
@@ -120,6 +142,8 @@
 
                 </form>
 
+
+                <!-- ENLACE DE REGISTRO -->
                 <div class="auth-divider">
                     <span>¿Primera vez en UniPath?</span>
                 </div>
@@ -129,6 +153,8 @@
                     <a href="registro.html">Crear cuenta</a>
                 </p>
 
+
+                <!-- AVISO -->
                 <p class="demo-note">
                     Acceso de demostración. La autenticación real se
                     habilitará al conectar el sistema con la base de datos.
@@ -136,6 +162,8 @@
 
             </div>
 
+
+            <!-- PIE DE PÁGINA -->
             <footer class="auth-footer">
                 UniPath · Tu camino universitario, más claro.
             </footer>
