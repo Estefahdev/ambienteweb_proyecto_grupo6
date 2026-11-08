@@ -4,8 +4,8 @@ require_once __DIR__ . '/comun.php';
 
 $pdo = obtenerConexion();
 
-// Se asume que el plan de estudios es general, no por estudiante
-$stmt = $pdo->query('SELECT semestre, codigo, nombre_materia, creditos FROM plan_estudios ORDER BY semestre ASC');
+// Traemos las asignaturas de la carrera 
+$stmt = $pdo->query('SELECT cuatrimestre_sugerido, codigo, nombre, creditos FROM asignaturas WHERE carrera_id = 1 ORDER BY cuatrimestre_sugerido ASC');
 $materias = $stmt->fetchAll();
 
 responderJson(200, ['plan' => $materias]);

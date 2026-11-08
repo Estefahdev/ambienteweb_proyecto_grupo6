@@ -1,5 +1,5 @@
 <?php
-// GET: devuelve la situación personal del estudiante · POST: la valida y la guarda
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/comun.php';
@@ -31,12 +31,12 @@ function obtenerSituacion(PDO $pdo, int $usuarioId): ?array
         'presupuesto'      => (float) $fila['presupuesto'],
         'maxMaterias'      => (int) $fila['max_materias'],
         'fechaMeta'        => $fila['periodo_meta'],
-        // La base guarda en UTC; se manda en ISO 8601 para que el navegador la pase a hora local
+       
         'actualizado'      => (new DateTimeImmutable($fila['actualizado'], new DateTimeZone('UTC')))->format(DATE_ATOM),
     ];
 }
 
-// Mismas reglas que el JS; se repiten porque la validación del navegador se puede saltar
+
 function validarSituacion(array $datos): array
 {
     $errores = [];
@@ -79,7 +79,7 @@ function validarSituacion(array $datos): array
 
     $meta = $datos['fechaMeta'] ?? null;
     if ($meta !== null && $meta !== '') {
-        // "2027-3" se puede comparar como texto porque el año siempre tiene 4 dígitos
+        
         if (!is_string($meta) || !preg_match('/^\d{4}-[1-3]$/', $meta) || $meta <= periodoActual()) {
             $errores['fechaMeta'] = 'Elegí un cuatrimestre futuro.';
         }
@@ -98,7 +98,7 @@ function guardarSituacion(PDO $pdo, int $usuarioId, array $datos): void
         ($datos['fechaMeta'] ?? '') ?: null,
     ];
 
-    // Todo o nada: si falla el horario, tampoco se guarda la situación
+    
     $pdo->beginTransaction();
 
     try {

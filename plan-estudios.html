@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Académico | UniPath</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/planificacion.css">
+    
+    <script type="module" src="js/perfil.js" defer></script>
+</head>
+
+<body class="app-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="index.html" aria-label="UniPath, ir al inicio">
+            <img src="assets/logo-unipath.png" alt="UniPath">
+            <span>Tu camino universitario,<br>más claro.</span>
+        </a>
+        <nav class="side-nav" aria-label="Navegación principal">
+            <a class="nav-link" href="index.html">Panel principal</a>
+            <a class="nav-link active" href="perfil-academico.html">Perfil académico</a>
+            <a class="nav-link" href="plan-estudios.html">Plan de estudios</a>
+            <a class="nav-link" href="situacion-personal.html">Situación personal</a>
+            <a class="nav-link" href="generador-rutas.html">Generador de rutas</a>
+            <a class="nav-link" href="mis-rutas.html">Mis rutas</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a class="nav-link" href="login.html">Cerrar sesión</a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-area plan-page">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <button class="mobile-menu" id="menuButton" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">
+                Menú
+            </button>
+            <label class="search">
+                <span class="search-label">Buscar</span>
+                <input type="search" placeholder="Buscar materias, códigos o rutas..." aria-label="Buscar materias, códigos o rutas">
+            </label>
+            <div class="user-area">
+                <span class="avatar" aria-hidden="true"></span>
+                <a href="perfil-academico.html">Mi cuenta</a>
+            </div>
+        </header>
+
+       <div class="plan-heading">
+            <h1>Plan de Estudios</h1>
+            <p>Malla curricular de tu carrera.</p>
+        </div>
+
+        <div class="plan-layout" style="grid-template-columns: 1fr;">
+            <div id="contenedorPlan" style="display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;">
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>
