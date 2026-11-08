@@ -1,26 +1,27 @@
 
-
 :root {
     --primary: #245C7A;
+    --primary-dark: #19445B;
     --secondary: #2FAE8F;
     --accent: #F2B84B;
 
-    --background: #F7F9FB;
+    --background: #F7F9FC;
     --surface: #FFFFFF;
     --text: #1F2933;
     --text-secondary: #687785;
     --border: #E3EBEF;
 
-    --mint-bg: #E6F7F1;
-    --blue-bg: #EAF2F9;
+    --success-bg: #E6F7F1;
+    --error-bg: #FBEDEC;
+    --error: #B5423D;
 
-    --radius: 11px;
-    --shadow: 0 8px 30px rgba(31, 41, 51, 0.06);
+    --radius: 10px;
+    --shadow: 0 8px 30px rgba(31, 41, 51, 0.05);
 }
 
-/* ==========================================
-   REINICIO Y CONFIGURACIÓN
-========================================== */
+/* =========================================
+   REINICIO
+========================================= */
 
 * {
     box-sizing: border-box;
@@ -31,7 +32,6 @@
 html {
     min-width: 320px;
     min-height: 100%;
-    scroll-behavior: smooth;
 }
 
 body {
@@ -39,10 +39,11 @@ body {
     min-height: 100dvh;
 
     font-family: "Inter", Arial, sans-serif;
-    font-size: 13px;
-    line-height: 1.45;
     color: var(--text);
     background: var(--background);
+
+    font-size: 13px;
+    line-height: 1.5;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -53,10 +54,14 @@ input {
     font: inherit;
 }
 
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 a {
     color: inherit;
     text-decoration: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible,
@@ -70,189 +75,386 @@ input:focus-visible {
     display: none !important;
 }
 
-/* ==========================================
+
+/* =========================================
    CONTENEDOR PRINCIPAL
-========================================== */
+========================================= */
 
 .auth-body {
     display: flex;
     align-items: stretch;
     justify-content: center;
-    padding: 24px;
 }
 
-.auth-shell {
+.register-shell {
     display: grid;
-    grid-template-columns:
-        minmax(0, 0.85fr)
-        minmax(0, 1.15fr);
+    grid-template-columns: 1fr 1fr;
 
     width: 100%;
-    max-width: 1120px;
-    min-height: 700px;
-    margin: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
 
-    overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: 16px;
     background: var(--surface);
-    box-shadow: var(--shadow);
 }
 
-/* ==========================================
-   PANEL DE MARCA
-========================================== */
 
-.auth-brand {
+/* =========================================
+   PANEL INSTITUCIONAL
+========================================= */
+
+.brand-panel {
+    position: relative;
+
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 
     min-width: 0;
-    padding: clamp(28px, 4vw, 52px);
+    padding: 38px clamp(30px, 5vw, 72px);
+
+    overflow: hidden;
 
     background: var(--primary);
     color: var(--surface);
 }
 
-.auth-logo {
-    display: inline-flex;
-    align-items: center;
-    max-width: 100%;
-    margin-bottom: auto;
+/* Círculos decorativos */
+
+.brand-panel::before,
+.brand-panel::after {
+    position: absolute;
+    content: "";
+
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.035);
+
+    pointer-events: none;
 }
 
-.auth-logo img {
+.brand-panel::before {
+    width: 240px;
+    height: 240px;
+    top: 25%;
+    right: 8%;
+}
+
+.brand-panel::after {
+    width: 360px;
+    height: 360px;
+    right: -15%;
+    bottom: -18%;
+}
+
+.brand-logo {
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+    margin-bottom: 25px;
+}
+
+.brand-logo img {
     display: block;
-    width: 190px;
+
+    width: 165px;
     max-width: 100%;
     height: auto;
+
     object-fit: contain;
     object-position: left center;
 }
 
-.brand-copy {
+
+/* =========================================
+   ETIQUETA INSTITUCIONAL
+========================================= */
+
+.institution-badge {
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    width: fit-content;
+    padding: 5px 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.09);
+
+    color: #D8EAEF;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+    background: #75E1C0;
+}
+
+
+/* =========================================
+   TEXTO DEL PANEL
+========================================= */
+
+.brand-content {
+    position: relative;
+    z-index: 1;
+
     width: 100%;
-    margin-top: 60px;
-    margin-bottom: 50px;
+    max-width: 490px;
+
+    margin: auto 0;
+    padding: 55px 0;
 }
 
-.eyebrow {
-    margin-bottom: 10px;
+.brand-content h1 {
+    margin-bottom: 14px;
 
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-    line-height: 1.6;
-}
+    color: var(--surface);
 
-.auth-brand .eyebrow {
-    color: #A9E7D5;
-}
-
-.brand-copy h1 {
-    margin-bottom: 18px;
-
-    font-size: clamp(27px, 3vw, 38px);
+    font-size: clamp(25px, 2.6vw, 34px);
     font-weight: 750;
-    letter-spacing: -1.2px;
-    line-height: 1.28;
+    letter-spacing: -0.9px;
+    line-height: 1.25;
 }
 
 .brand-description {
-    max-width: 350px;
+    max-width: 440px;
 
-    color: #E0EAF0;
-    font-size: 12px;
+    color: #D5E4EC;
+
+    font-size: 11px;
     line-height: 1.9;
 }
 
+
+/* =========================================
+   PASOS DEL PANEL IZQUIERDO
+========================================= */
+
+.activation-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+
+    margin-top: 30px;
+}
+
+.brand-step {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    opacity: 0.48;
+    transition: opacity 0.2s ease;
+}
+
+.brand-step.active,
+.brand-step.completed {
+    opacity: 1;
+}
+
+.brand-step-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 24px;
+
+    width: 24px;
+    height: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.brand-step.active .brand-step-icon,
+.brand-step.completed .brand-step-icon {
+    border-color: var(--secondary);
+    background: var(--secondary);
+    color: #FFFFFF;
+}
+
+.brand-step div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.brand-step strong {
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.brand-step span:last-child {
+    color: #D5E4EC;
+    font-size: 9px;
+}
+
+
+/* =========================================
+   PIE DEL PANEL IZQUIERDO
+========================================= */
+
 .brand-footer {
+    position: relative;
+    z-index: 1;
+
+    padding-top: 20px;
+
+    color: #B7D0DC;
+    font-size: 9px;
+}
+
+
+/* =========================================
+   PANEL DEL FORMULARIO
+========================================= */
+
+.form-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    padding: 35px clamp(25px, 5vw, 65px);
+
+    background: var(--background);
+}
+
+.activation-card {
     width: 100%;
-    padding-top: 18px;
+    max-width: 430px;
 
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px 30px 25px;
 
-    color: #D8E5EC;
+    border: 1px solid #EDF0F4;
+    border-radius: 11px;
+
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================
+   INDICADOR DE PROGRESO
+========================================= */
+
+.progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    margin-bottom: 27px;
+}
+
+.progress-step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    position: relative;
+
+    color: #8995A3;
+    font-size: 9px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.progress-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+    background: #E8EDF4;
+
+    color: #788696;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.progress-step.active {
+    color: var(--text);
+}
+
+.progress-step.active .progress-number,
+.progress-step.completed .progress-number {
+    background: var(--primary);
+    color: #FFFFFF;
+}
+
+.progress-line {
+    flex: 1;
+    height: 2px;
+    min-width: 10px;
+    margin: 0 9px;
+
+    background: #E3EBEF;
+}
+
+.progress-line.completed {
+    background: var(--primary);
+}
+
+
+/* =========================================
+   ETAPAS DEL FORMULARIO
+========================================= */
+
+.activation-stage {
+    width: 100%;
+}
+
+.stage-heading {
+    margin-bottom: 23px;
+}
+
+.stage-heading h2 {
+    margin-bottom: 6px;
+
+    color: var(--text);
+
+    font-size: 21px;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.stage-heading p {
+    color: var(--text-secondary);
+
     font-size: 10px;
     line-height: 1.7;
 }
 
-/* ==========================================
-   CONTENIDO DEL REGISTRO
-========================================== */
 
-.auth-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* =========================================
+   FORMULARIOS
+========================================= */
 
-    min-width: 0;
-    padding: clamp(25px, 4vw, 48px);
-    background: var(--surface);
-}
-
-.auth-card {
-    width: 100%;
-    max-width: 460px;
-    margin: auto;
-}
-
-.back-link {
-    display: inline-block;
-    margin-bottom: 26px;
-
-    color: var(--text-secondary);
-    font-size: 11px;
-    font-weight: 500;
-
-    transition: color 0.2s ease;
-}
-
-.back-link::before {
-    content: "←";
-    display: inline-block;
-    margin-right: 8px;
-}
-
-.back-link:hover {
-    color: var(--primary);
-}
-
-/* ==========================================
-   ENCABEZADO
-========================================== */
-
-.form-heading {
-    margin-bottom: 23px;
-}
-
-.form-heading .eyebrow {
-    margin-bottom: 7px;
-    color: var(--secondary);
-}
-
-.form-heading h2 {
-    margin-bottom: 8px;
-
-    color: var(--text);
-    font-size: clamp(25px, 3vw, 30px);
-    font-weight: 750;
-    letter-spacing: -0.8px;
-    line-height: 1.3;
-}
-
-.muted {
-    color: var(--text-secondary);
-    font-size: 11px;
-    line-height: 1.8;
-}
-
-/* ==========================================
-   FORMULARIO Y CAMPOS
-========================================== */
-
-#registerForm {
+.activation-stage form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -263,125 +465,123 @@ input:focus-visible {
     flex-direction: column;
     gap: 7px;
 
-    min-width: 0;
-    margin-bottom: 15px;
+    margin-bottom: 17px;
 }
 
-.form-group > label {
+.form-group label {
     color: var(--text);
     font-size: 10px;
     font-weight: 650;
 }
 
-.form-group input {
-    display: block;
+.form-group small {
+    color: var(--text-secondary);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   CAMPOS DE ENTRADA
+========================================= */
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-symbol {
+    position: absolute;
+    left: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 15px;
+
+    color: #526575;
+    font-size: 12px;
+    font-weight: 700;
+
+    pointer-events: none;
+}
+
+.input-wrapper input,
+.form-group > input {
     width: 100%;
     min-width: 0;
-    min-height: 41px;
-    padding: 10px 12px;
+    min-height: 43px;
 
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--surface);
+    padding: 11px 12px 11px 37px;
 
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    background: #EDF3FC;
     color: var(--text);
-    font-size: 11px;
+
+    font-size: 10px;
 
     transition:
         border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.form-group input::placeholder {
+.form-group > input {
+    padding-left: 12px;
+}
+
+.input-wrapper input::placeholder,
+.form-group > input::placeholder {
     color: #8997A4;
     opacity: 1;
 }
 
-.form-group input:hover {
-    border-color: #B7C8D1;
-}
-
-.form-group input:focus {
-    border-color: var(--secondary);
+.input-wrapper input:focus,
+.form-group > input:focus {
+    border-color: var(--primary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(47, 174, 143, 0.10);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(36, 92, 122, 0.09);
 }
 
-/* ==========================================
-   CAMPOS EN DOS COLUMNAS
-========================================== */
 
-.form-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 13px;
-}
-
-.form-row .form-group {
-    margin-bottom: 15px;
-}
-
-/* ==========================================
-   ACEPTACIÓN DE CONDICIONES
-========================================== */
-
-.check-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-
-    color: var(--text-secondary);
-    font-size: 10px;
-    line-height: 1.7;
-
-    cursor: pointer;
-}
-
-.check-label input {
-    flex: 0 0 14px;
-
-    width: 14px;
-    height: 14px;
-    margin-top: 2px;
-
-    accent-color: var(--primary);
-    cursor: pointer;
-}
-
-.terms {
-    margin: 2px 0 18px;
-}
-
-/* ==========================================
-   BOTÓN PRINCIPAL
-========================================== */
+/* =========================================
+   BOTONES
+========================================= */
 
 .primary-button {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 9px;
 
     width: 100%;
     min-height: 43px;
-    padding: 12px 16px;
 
-    border: 0;
+    padding: 11px 16px;
+
+    border: none;
     border-radius: 7px;
-    background: var(--primary);
 
-    color: var(--surface);
-    font-size: 11px;
+    background: var(--primary);
+    color: #FFFFFF;
+
+    font-size: 10px;
     font-weight: 650;
 
     cursor: pointer;
 
     transition:
-        background-color 0.2s ease,
+        background 0.2s ease,
         transform 0.2s ease;
 }
 
 .primary-button:hover {
-    background: #19445B;
+    background: var(--primary-dark);
 }
 
 .primary-button:active {
@@ -389,55 +589,95 @@ input:focus-visible {
 }
 
 .primary-button:disabled {
+    opacity: 0.65;
     cursor: not-allowed;
-    opacity: 0.7;
 }
 
-/* ==========================================
-   MENSAJES DE VALIDACIÓN
-========================================== */
+.primary-button span {
+    font-size: 15px;
+}
 
-.form-message {
-    margin-top: 13px;
-    padding: 11px 12px;
+.secondary-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 43px;
+    padding: 10px 17px;
 
     border: 1px solid var(--border);
     border-radius: 7px;
 
-    background: var(--blue-bg);
-    color: var(--primary);
+    background: #FFFFFF;
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background: #F7F9FB;
+}
+
+.stage-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.stage-actions .primary-button {
+    flex: 1;
+}
+
+
+/* =========================================
+   MENSAJES
+========================================= */
+
+.form-message {
+    margin-top: 17px;
+    padding: 12px;
+
+    border: 1px solid #F1D2D0;
+    border-radius: 7px;
+
+    background: var(--error-bg);
+    color: var(--error);
 
     font-size: 10px;
     line-height: 1.7;
     overflow-wrap: anywhere;
 }
 
-.form-message.error {
-    border-color: #F1D2D0;
-    background: #FBEDEC;
-    color: #B5423D;
-}
-
 .form-message.success {
     border-color: #C5EBDD;
-    background: var(--mint-bg);
+    background: var(--success-bg);
     color: #187E67;
 }
 
-/* ==========================================
-   ENLACE PARA INICIAR SESIÓN
-========================================== */
+.form-message.info {
+    border-color: #D6E4F1;
+    background: #EDF3FC;
+    color: var(--primary);
+}
+
+
+/* =========================================
+   ENLACE DE INICIO DE SESIÓN
+========================================= */
 
 .switch-auth {
     margin-top: 21px;
 
     color: var(--text-secondary);
     font-size: 10px;
-    line-height: 1.8;
     text-align: center;
 }
 
 .switch-auth a {
+    margin-left: 4px;
+
     color: var(--primary);
     font-weight: 700;
 }
@@ -446,240 +686,204 @@ input:focus-visible {
     text-decoration: underline;
 }
 
-/* ==========================================
-   AVISO DE DEMOSTRACIÓN
-========================================== */
 
-.demo-note {
-    margin-top: 18px;
-    padding: 11px 12px;
+/* =========================================
+   SEGURIDAD
+========================================= */
 
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: #F7F9FB;
-
-    color: var(--text-secondary);
-    font-size: 9px;
-    line-height: 1.8;
-    text-align: center;
-}
-
-/* ==========================================
-   PIE DE PÁGINA
-========================================== */
-
-.auth-footer {
-    padding-top: 23px;
+.security-note {
+    margin-bottom: 19px;
 
     color: var(--text-secondary);
     font-size: 9px;
     line-height: 1.7;
+}
+
+
+/* =========================================
+   ETAPA FINAL
+========================================= */
+
+.completion-stage {
+    text-align: center;
+    padding: 15px 0 10px;
+}
+
+.success-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+    background: var(--success-bg);
+    color: #187E67;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.completion-stage h2 {
+    margin-bottom: 9px;
+
+    font-size: 22px;
+    font-weight: 750;
+}
+
+.completion-stage p {
+    margin-bottom: 22px;
+
+    color: var(--text-secondary);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.login-button {
+    text-decoration: none;
+}
+
+
+/* =========================================
+   PIE DEL PANEL DERECHO
+========================================= */
+
+.form-footer {
+    width: 100%;
+    max-width: 430px;
+
+    margin-top: 22px;
+
+    color: var(--text-secondary);
+    font-size: 9px;
     text-align: center;
 }
 
-/* ==========================================
-   PANTALLAS GRANDES
-========================================== */
 
-@media (min-width: 1500px) {
-    .auth-shell {
-        max-width: 1200px;
-        min-height: 740px;
-    }
-
-    .auth-brand {
-        padding: 60px;
-    }
-
-    .auth-content {
-        padding: 52px;
-    }
-
-    .auth-card {
-        max-width: 470px;
-    }
-}
-
-/* ==========================================
-   TABLETAS Y PANTALLAS MEDIANAS
-========================================== */
+/* =========================================
+   TABLETAS
+========================================= */
 
 @media (max-width: 900px) {
-    .auth-body {
-        padding: 18px;
+    .brand-panel {
+        padding: 30px;
     }
 
-    .auth-shell {
-        grid-template-columns:
-            minmax(0, 0.8fr)
-            minmax(0, 1.2fr);
-
-        min-height: 680px;
+    .form-panel {
+        padding: 25px;
     }
 
-    .auth-brand {
-        padding: 28px;
+    .activation-card {
+        padding: 25px 22px;
     }
 
-    .auth-logo img {
-        width: 160px;
-    }
-
-    .brand-copy {
-        margin-top: 45px;
-        margin-bottom: 40px;
-    }
-
-    .brand-copy h1 {
-        font-size: 28px;
-    }
-
-    .auth-content {
-        padding: 28px;
-    }
-
-    .auth-card {
-        max-width: 440px;
+    .brand-content h1 {
+        font-size: 27px;
     }
 }
 
-/* ==========================================
-   TABLETAS PEQUEÑAS Y CELULARES
-========================================== */
+
+/* =========================================
+   CELULARES
+========================================= */
 
 @media (max-width: 650px) {
-    .auth-body {
-        display: block;
-        padding: 0;
-        background: var(--surface);
-    }
-
-    .auth-shell {
+    .register-shell {
         display: flex;
         flex-direction: column;
-
-        width: 100%;
-        max-width: 500px;
-        min-height: 100vh;
-        min-height: 100dvh;
-        margin: 0 auto;
-
-        overflow: visible;
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
     }
 
-    .auth-brand {
+    .brand-panel {
         min-height: auto;
-        padding: 23px 24px 25px;
+        padding: 22px 23px 24px;
     }
 
-    .auth-logo {
-        margin-bottom: 22px;
+    .brand-logo {
+        margin-bottom: 18px;
     }
 
-    .auth-logo img {
+    .brand-logo img {
         width: 145px;
     }
 
-    .brand-copy {
-        margin: 0 0 20px;
+    .brand-content {
+        margin: 23px 0 20px;
+        padding: 0;
     }
 
-    .auth-brand .eyebrow {
-        margin-bottom: 6px;
-    }
-
-    .brand-copy h1 {
-        margin-bottom: 10px;
-
-        font-size: 26px;
-        letter-spacing: -0.7px;
-    }
-
-    .brand-description {
-        max-width: 400px;
-        font-size: 11px;
-        line-height: 1.7;
-    }
-
-    .brand-footer {
-        padding-top: 12px;
-        font-size: 9px;
-    }
-
-    .auth-content {
-        flex: 1;
-        justify-content: flex-start;
-        padding: 25px 24px 20px;
-    }
-
-    .auth-card {
-        max-width: 440px;
-    }
-
-    .back-link {
-        margin-bottom: 23px;
-    }
-
-    .form-heading {
-        margin-bottom: 20px;
-    }
-
-    .form-heading h2 {
-        font-size: 27px;
-    }
-
-    .form-group {
-        margin-bottom: 14px;
-    }
-
-    .auth-footer {
-        margin-top: auto;
-        padding-top: 30px;
-    }
-}
-
-/* ==========================================
-   CELULARES PEQUEÑOS
-========================================== */
-
-@media (max-width: 400px) {
-    .auth-brand {
-        padding: 20px 18px 22px;
-    }
-
-    .brand-copy h1 {
+    .brand-content h1 {
         font-size: 24px;
     }
 
-    .auth-content {
-        padding: 22px 18px 18px;
+    .brand-description {
+        font-size: 10px;
     }
 
-    .form-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
+    .activation-steps {
+        gap: 13px;
+        margin-top: 21px;
     }
 
-    .form-row .form-group {
-        margin-bottom: 14px;
+    .brand-footer {
+        padding-top: 13px;
     }
 
-    .form-group input {
-        min-height: 42px;
-        font-size: 11px;
+    .form-panel {
+        flex: 1;
+        justify-content: flex-start;
+        padding: 25px 20px 22px;
     }
 
-    .primary-button {
-        min-height: 43px;
+    .activation-card {
+        max-width: 440px;
+        padding: 24px 20px;
+    }
+
+    .form-footer {
+        margin-top: auto;
+        padding-top: 25px;
     }
 }
 
-/* ==========================================
+
+/* =========================================
+   CELULARES PEQUEÑOS
+========================================= */
+
+@media (max-width: 380px) {
+    .brand-panel {
+        padding: 19px 18px 21px;
+    }
+
+    .brand-content h1 {
+        font-size: 22px;
+    }
+
+    .form-panel {
+        padding: 20px 13px;
+    }
+
+    .activation-card {
+        padding: 21px 15px;
+    }
+
+    .progress-step {
+        gap: 4px;
+        font-size: 8px;
+    }
+
+    .progress-line {
+        margin: 0 5px;
+    }
+}
+
+
+/* =========================================
    ACCESIBILIDAD
-========================================== */
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -687,6 +891,5 @@ input:focus-visible {
     *::after {
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
     }
 }
