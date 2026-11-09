@@ -3,67 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Académico | UniPath</title>
+    <title>Plan de estudios | UniPath</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/planificacion.css">
-    
-    <script type="module" src="js/perfil.js" defer></script>
+    <link rel="stylesheet" href="css/academic.css">
+    <script type="module" src="js/academic-plan.js"></script>
 </head>
-
-<body class="app-body">
-
+<body class="app-body academic-app" data-page="plan">
+    <a class="skip-link" href="#academicContent">Saltar al contenido</a>
+    
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-        <a class="brand" href="index.html" aria-label="UniPath, ir al inicio">
+        <a class="brand" href="index.html" aria-label="UniPath, ir al panel principal">
             <img src="assets/logo-unipath.png" alt="UniPath">
             <span>Tu camino universitario,<br>más claro.</span>
         </a>
         <nav class="side-nav" aria-label="Navegación principal">
-            <a class="nav-link" href="index.html">Panel principal</a>
-            <a class="nav-link active" href="perfil-academico.html">Perfil académico</a>
-            <a class="nav-link" href="plan-estudios.html">Plan de estudios</a>
-            <a class="nav-link" href="situacion-personal.html">Situación personal</a>
-            <a class="nav-link" href="generador-rutas.html">Generador de rutas</a>
-            <a class="nav-link" href="mis-rutas.html">Mis rutas</a>
+            <a class="nav-link" href="index.html"><img class="academic-icon" src="assets/academic/1-6612-imgContainer13.svg" alt="">Panel principal</a>
+            <a class="nav-link" href="perfil-academico.html"><img class="academic-icon" src="assets/academic/1-6612-imgContainer14.svg" alt="">Perfil académico</a>
+            <a class="nav-link active" href="plan-estudios.html" aria-current="page"><img class="academic-icon" src="assets/academic/1-6612-imgContainer15.svg" alt="">Plan de estudios</a>
+            <a class="nav-link" href="situacion-personal.html"><img class="academic-icon" src="assets/academic/1-6612-imgContainer16.svg" alt="">Situación personal</a>
+            <a class="nav-link" href="generador-rutas.html"><img class="academic-icon" src="assets/academic/1-6612-imgContainer17.svg" alt="">Generador de rutas</a>
+            <a class="nav-link" href="mis-rutas.html"><img class="academic-icon" src="assets/academic/1-6612-imgContainer18.svg" alt="">Mis rutas</a>
         </nav>
         <div class="sidebar-bottom">
-            <a class="nav-link" href="login.html">Cerrar sesión</a>
+            <a class="nav-link" id="logout" href="login.html"><img class="academic-icon" src="assets/academic/1-6612-imgContainer19.svg" alt="">Cerrar sesión</a>
         </div>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-area plan-page">
-
-        <!-- TOPBAR -->
+    <!-- MAIN -->
+    <main class="main-area">
         <header class="topbar">
-            <button class="mobile-menu" id="menuButton" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">
-                Menú
-            </button>
-            <label class="search">
-                <span class="search-label">Buscar</span>
-                <input type="search" placeholder="Buscar materias, códigos o rutas..." aria-label="Buscar materias, códigos o rutas">
-            </label>
-            <div class="user-area">
-                <span class="avatar" aria-hidden="true"></span>
-                <a href="perfil-academico.html">Mi cuenta</a>
-            </div>
+            <button class="mobile-menu" id="menuButton" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">Menú</button>
+            <form class="academic-search" action="plan-estudios.html" role="search">
+                <img class="academic-icon" src="assets/academic/1-6612-imgIcon1.svg" alt="">
+                <input type="search" name="q" placeholder="Buscar materias o códigos..." aria-label="Buscar materias o códigos">
+            </form>
+            <a class="academic-account" href="perfil-academico.html">
+                <span><strong id="accountName">Estudiante de prueba</strong><small>Ingeniería en Sistemas</small></span>
+                <span class="account-icon"><img class="academic-icon" src="assets/academic/1-6612-imgContainer10.svg" alt=""></span>
+            </a>
         </header>
 
-       <div class="plan-heading">
-            <h1>Plan de Estudios</h1>
-            <p>Malla curricular de tu carrera.</p>
-        </div>
+        <div id="academicContent" tabindex="-1">
+            <div class="academic-heading">
+                <div>
+                    <span class="tag">Plan de carrera · Bachillerato</span>
+                    <h1>Plan de estudios</h1>
+                    <p>Malla curricular de Ingeniería en Sistemas de Computación.</p>
+                </div>
+                <div id="planStats" class="stat-tags"></div>
+            </div>
+            
+            <section class="academic-card legend-toolbar" aria-label="Leyenda y controles del plan">
+                <div class="legend">
+                    <strong>LEYENDA:</strong>
+                    <span class="state approved">Aprobada</span>
+                    <span class="state current">En curso</span>
+                    <span class="state available">Disponible</span>
+                    <span class="state blocked">Bloqueada</span>
+                    <span class="state pending">Pendiente</span>
+                </div>
+                <div class="board-controls">
+                    <button type="button" id="zoomOut" aria-label="Reducir tamaño de las tarjetas">−</button>
+                    <output id="zoomValue">100%</output>
+                    <button type="button" id="zoomIn" aria-label="Aumentar tamaño de las tarjetas">+</button>
+                    <button type="button" id="resetView">Ajustar vista</button>
+                </div>
+            </section>
 
-        <div class="plan-layout" style="grid-template-columns: 1fr;">
-            <div id="contenedorPlan" style="display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;">
+            <div class="plan-toolbar">
+                <input id="planSearch" type="search" aria-label="Buscar en el plan de estudios" placeholder="Buscar materia o código...">
+                <label>Estado 
+                    <select id="planFilter">
+                        <option value="all">Todos</option>
+                        <option value="aprobada">Aprobadas</option>
+                        <option value="en_curso">En curso</option>
+                        <option value="disponible">Disponibles</option>
+                        <option value="bloqueada">Bloqueadas</option>
+                    </select>
+                </label>
+            </div>
 
+            <div class="academic-plan-layout">
+                <div>
+                    <section class="academic-card board-card">
+                        <div class="section-heading">
+                            <h2>Trayectoria académica</h2>
+                            <span class="muted">Desplazá horizontalmente para explorar →</span>
+                        </div>
+                        <div class="board-scroll" id="boardScroll" tabindex="0" aria-label="Malla curricular por cuatrimestre">
+                            <!-- AQUÍ EL JS INSERTARÁ LAS TARJETAS -->
+                            <div class="course-board" id="courseBoard"></div>
+                        </div>
+                    </section>
+                    <aside class="rule-note">
+                        <h3>Regla de candados y prerrequisitos</h3>
+                        <p>Una materia está disponible cuando aprobaste todos sus prerrequisitos. Actualizá tus materias en el perfil académico para ver los cambios en la malla.</p>
+                    </aside>
+                </div>
+                <aside class="academic-card course-detail" id="courseDetail" aria-label="Detalle de materia" tabindex="-1"></aside>
             </div>
         </div>
+        <p class="demo-note">Datos académicos de ejemplo · UniPath</p>
+        <p class="academic-notice" id="notice" role="status" hidden></p>
     </main>
 </body>
 </html>

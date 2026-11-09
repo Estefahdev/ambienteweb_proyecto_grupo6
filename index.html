@@ -684,3 +684,41 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel principal | UniPath</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/academic.css">
+    <script type="module" src="js/academic-dashboard.js"></script>
+</head>
+<body class="app-body academic-app" data-page="dashboard">
+    <a class="skip-link" href="#academicContent">Saltar al contenido</a>
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="index.html" aria-label="UniPath, ir al panel principal">
+            <img src="assets/logo-unipath.png" alt="UniPath">
+            <span>Tu camino universitario,<br>más claro.</span>
+        </a>
+        <nav class="side-nav" aria-label="Navegación principal"><a class="nav-link active" href="index.html" aria-current="page"><img class="academic-icon" src="assets/academic/1-6612-imgContainer13.svg" alt="">Panel principal</a><a class="nav-link " href="perfil-academico.html" ><img class="academic-icon" src="assets/academic/1-6612-imgContainer14.svg" alt="">Perfil académico</a><a class="nav-link " href="plan-estudios.html" ><img class="academic-icon" src="assets/academic/1-6612-imgContainer15.svg" alt="">Plan de estudios</a><a class="nav-link " href="situacion-personal.html" ><img class="academic-icon" src="assets/academic/1-6612-imgContainer16.svg" alt="">Situación personal</a><a class="nav-link " href="generador-rutas.html" ><img class="academic-icon" src="assets/academic/1-6612-imgContainer17.svg" alt="">Generador de rutas</a><a class="nav-link " href="mis-rutas.html" ><img class="academic-icon" src="assets/academic/1-6612-imgContainer18.svg" alt="">Mis rutas</a></nav>
+        <div class="sidebar-bottom"><a class="nav-link" id="logout" href="login.html"><img class="academic-icon" src="assets/academic/1-6612-imgContainer19.svg" alt="">Cerrar sesión</a></div>
+    </aside>
+    <main class="main-area">
+        <header class="topbar">
+            <button class="mobile-menu" id="menuButton" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">Menú</button>
+            <form class="academic-search" action="plan-estudios.html" role="search">
+                <img class="academic-icon" src="assets/academic/1-6612-imgIcon1.svg" alt=""><input type="search" name="q" placeholder="Buscar materias o códigos..." aria-label="Buscar materias o códigos">
+            </form>
+            <a class="academic-account" href="perfil-academico.html"><span><strong id="accountName">Estudiante de prueba</strong><small>Ingeniería en Sistemas</small></span><span class="account-icon"><img class="academic-icon" src="assets/academic/1-6612-imgContainer10.svg" alt=""></span></a>
+        </header>
+        <div id="academicContent" tabindex="-1">
+    <div class="academic-heading"><div><h1 id="greeting">Hola 👋</h1><p>Este es el resumen de tu avance académico y planificación.</p></div><a class="academic-button" href="generador-rutas.html">Ajustar ruta</a></div>
+    <div class="academic-metrics" id="dashboardMetrics"></div>
+    <div class="dashboard-layout"><div class="dashboard-main"><section class="academic-card"><div class="section-heading"><div><h2>Materias en curso</h2><p>Tu carga académica actual.</p></div><span class="tag" id="currentCredits"></span></div><div id="currentCourses"></div><div class="card-footer"><a href="perfil-academico.html">Ajustar carga académica</a><a class="academic-button" href="plan-estudios.html">Ver plan completo →</a></div></section><section class="academic-card"><div class="section-heading"><div><h2>Distribución de créditos</h2><p>Créditos del plan y avance por cuatrimestre sugerido.</p></div></div><div class="credit-chart" id="creditChart" role="img" aria-label="Créditos aprobados, en curso y pendientes por cuatrimestre"></div><div class="chart-legend"><span><i class="approved-dot"></i>Aprobados</span><span><i class="current-dot"></i>En curso</span><span><i class="pending-dot"></i>Pendientes</span></div></section></div><div class="dashboard-aside"><section class="academic-card"><div class="section-heading"><h2>Situación personal</h2><a href="situacion-personal.html">Editar</a></div><p>Tu horario, disponibilidad y presupuesto ayudan a planificar la carga académica.</p><a class="academic-button secondary full-width" href="situacion-personal.html">Revisar situación personal</a></section><section class="academic-card"><h2>Ruta activa</h2><div id="activeRoute"></div></section><section class="rule-note warning"><h3>Tu siguiente paso</h3><p>Revisá tus materias aprobadas antes de generar una ruta. Así el plan parte de tu avance real.</p><a href="perfil-academico.html">Actualizar perfil académico →</a></section></div></div>
+</div>
+        <p class="demo-note">Datos académicos de ejemplo · UniPath</p>
+        <p class="academic-notice" id="notice" role="status" hidden></p>
+    </main>
+</body>
+</html>

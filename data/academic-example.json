@@ -1,0 +1,366 @@
+{
+  "career": "Ingeniería en Sistemas de Computación",
+  "university": "Universidad Fidélitas",
+  "plan": "Plan de ejemplo ISC",
+  "courses": [
+    {
+      "code": "MA-101",
+      "name": "Matemática general",
+      "term": 1,
+      "credits": 3,
+      "hours": 4,
+      "cost": 90000,
+      "requirements": []
+    },
+    {
+      "code": "SC-101",
+      "name": "Introducción a la programación",
+      "term": 1,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": []
+    },
+    {
+      "code": "EG-101",
+      "name": "Comunicación oral y escrita",
+      "term": 1,
+      "credits": 3,
+      "hours": 3,
+      "cost": 90000,
+      "requirements": []
+    },
+    {
+      "code": "MA-102",
+      "name": "Cálculo I",
+      "term": 2,
+      "credits": 4,
+      "hours": 6,
+      "cost": 120000,
+      "requirements": [
+        "MA-101"
+      ]
+    },
+    {
+      "code": "SC-102",
+      "name": "Programación I",
+      "term": 2,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-101"
+      ]
+    },
+    {
+      "code": "SC-103",
+      "name": "Fundamentos de computación",
+      "term": 2,
+      "credits": 3,
+      "hours": 4,
+      "cost": 90000,
+      "requirements": [
+        "SC-101"
+      ]
+    },
+    {
+      "code": "MA-201",
+      "name": "Álgebra lineal",
+      "term": 3,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "MA-102"
+      ]
+    },
+    {
+      "code": "SC-201",
+      "name": "Programación II",
+      "term": 3,
+      "credits": 4,
+      "hours": 6,
+      "cost": 120000,
+      "requirements": [
+        "SC-102"
+      ]
+    },
+    {
+      "code": "SC-202",
+      "name": "Estructuras de datos",
+      "term": 3,
+      "credits": 4,
+      "hours": 6,
+      "cost": 120000,
+      "requirements": [
+        "SC-102",
+        "SC-103"
+      ]
+    },
+    {
+      "code": "MA-202",
+      "name": "Estadística",
+      "term": 4,
+      "credits": 3,
+      "hours": 4,
+      "cost": 90000,
+      "requirements": [
+        "MA-201"
+      ]
+    },
+    {
+      "code": "SC-203",
+      "name": "Bases de datos I",
+      "term": 4,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-202"
+      ]
+    },
+    {
+      "code": "SC-204",
+      "name": "Arquitectura de computadoras",
+      "term": 4,
+      "credits": 3,
+      "hours": 4,
+      "cost": 90000,
+      "requirements": [
+        "SC-103"
+      ]
+    },
+    {
+      "code": "SC-301",
+      "name": "Bases de datos II",
+      "term": 5,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-203"
+      ]
+    },
+    {
+      "code": "SC-302",
+      "name": "Sistemas operativos",
+      "term": 5,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-204"
+      ]
+    },
+    {
+      "code": "SC-303",
+      "name": "Ingeniería de software I",
+      "term": 5,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-201"
+      ]
+    },
+    {
+      "code": "SC-502",
+      "name": "Ambiente web cliente servidor",
+      "term": 6,
+      "credits": 4,
+      "hours": 6,
+      "cost": 120000,
+      "requirements": [
+        "SC-201",
+        "SC-203"
+      ]
+    },
+    {
+      "code": "SC-401",
+      "name": "Redes I",
+      "term": 6,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-204"
+      ]
+    },
+    {
+      "code": "SC-402",
+      "name": "Análisis y diseño de sistemas",
+      "term": 6,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-303"
+      ]
+    },
+    {
+      "code": "SC-601",
+      "name": "Programación web avanzada",
+      "term": 7,
+      "credits": 4,
+      "hours": 6,
+      "cost": 120000,
+      "requirements": [
+        "SC-502"
+      ]
+    },
+    {
+      "code": "SC-602",
+      "name": "Redes II",
+      "term": 7,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-401"
+      ]
+    },
+    {
+      "code": "SC-603",
+      "name": "Ingeniería de software II",
+      "term": 7,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-402"
+      ]
+    },
+    {
+      "code": "SC-701",
+      "name": "Seguridad informática",
+      "term": 8,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-602"
+      ]
+    },
+    {
+      "code": "SC-702",
+      "name": "Computación en la nube",
+      "term": 8,
+      "credits": 4,
+      "hours": 6,
+      "cost": 120000,
+      "requirements": [
+        "SC-601",
+        "SC-401"
+      ]
+    },
+    {
+      "code": "SC-703",
+      "name": "Gestión de proyectos",
+      "term": 8,
+      "credits": 3,
+      "hours": 4,
+      "cost": 90000,
+      "requirements": [
+        "SC-603"
+      ]
+    },
+    {
+      "code": "SC-801",
+      "name": "Inteligencia artificial",
+      "term": 9,
+      "credits": 4,
+      "hours": 6,
+      "cost": 120000,
+      "requirements": [
+        "MA-202",
+        "SC-202"
+      ]
+    },
+    {
+      "code": "SC-802",
+      "name": "Aplicaciones móviles",
+      "term": 9,
+      "credits": 4,
+      "hours": 5,
+      "cost": 120000,
+      "requirements": [
+        "SC-601"
+      ]
+    },
+    {
+      "code": "EG-801",
+      "name": "Ética profesional",
+      "term": 9,
+      "credits": 3,
+      "hours": 3,
+      "cost": 90000,
+      "requirements": []
+    },
+    {
+      "code": "SC-901",
+      "name": "Auditoría de sistemas",
+      "term": 10,
+      "credits": 3,
+      "hours": 4,
+      "cost": 90000,
+      "requirements": [
+        "SC-701"
+      ]
+    },
+    {
+      "code": "SC-902",
+      "name": "Proyecto de graduación",
+      "term": 10,
+      "credits": 4,
+      "hours": 8,
+      "cost": 120000,
+      "requirements": [
+        "SC-702",
+        "SC-703"
+      ]
+    },
+    {
+      "code": "SC-903",
+      "name": "Calidad de software",
+      "term": 10,
+      "credits": 3,
+      "hours": 4,
+      "cost": 90000,
+      "requirements": [
+        "SC-603"
+      ]
+    }
+  ],
+  "states": {
+    "MA-101": "aprobada",
+    "SC-101": "aprobada",
+    "EG-101": "aprobada",
+    "MA-102": "aprobada",
+    "SC-102": "aprobada",
+    "SC-103": "aprobada",
+    "MA-201": "aprobada",
+    "SC-201": "aprobada",
+    "SC-202": "aprobada",
+    "MA-202": "aprobada",
+    "SC-203": "aprobada",
+    "SC-204": "aprobada",
+    "SC-301": "aprobada",
+    "SC-302": "en_curso",
+    "SC-303": "aprobada",
+    "SC-502": "en_curso",
+    "SC-401": "en_curso",
+    "SC-402": "en_curso",
+    "SC-601": "pendiente",
+    "SC-602": "pendiente",
+    "SC-603": "pendiente",
+    "SC-701": "pendiente",
+    "SC-702": "pendiente",
+    "SC-703": "pendiente",
+    "SC-801": "pendiente",
+    "SC-802": "pendiente",
+    "EG-801": "pendiente",
+    "SC-901": "pendiente",
+    "SC-902": "pendiente",
+    "SC-903": "pendiente"
+  }
+}
