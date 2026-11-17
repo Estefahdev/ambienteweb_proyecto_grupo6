@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/conexion.php';
 
 header('Content-Type: application/json; charset=utf-8');
@@ -28,6 +30,7 @@ function responder(int $codigo, array $datos): void
     exit;
 }
 
+// Permitir únicamente solicitudes POST.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     responder(405, [
         'success' => false,
@@ -35,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     ]);
 }
 
+// Recibir credenciales.
 $correo = trim($_POST['email'] ?? '');
 $contrasena = $_POST['password'] ?? '';
 
@@ -52,6 +56,7 @@ if (
 try {
     $pdo = obtenerConexion();
 
+    // Buscar usuario por correo institucional.
     $consulta = $pdo->prepare(
         "SELECT
             id,
@@ -72,6 +77,7 @@ try {
 
     $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
 
+    // Validar credenciales y estado de la cuenta.
     if (
         !$usuario ||
         $usuario['estado'] !== 'activo' ||
@@ -87,10 +93,23 @@ try {
         ]);
     }
 
+    // Validar que el rol sea reconocido.
+    $rolesPermitidos = [
+        'estudiante',
+        'administrador'
+    ];
+
+    if (!in_array($usuario['rol'], $rolesPermitidos, true)) {
+        responder(403, [
+            'success' => false,
+            'message' => 'El rol de usuario no está autorizado.'
+        ]);
+    }
+
     // Evitar la fijación de sesión.
     session_regenerate_id(true);
 
-    // Guardar únicamente los datos necesarios.
+    // Guardar los datos del usuario en la sesión.
     $_SESSION['usuario'] = [
         'id' => (int) $usuario['id'],
         'nombre' => $usuario['nombre'],
@@ -99,12 +118,21 @@ try {
         'carrera_id' => $usuario['carrera_id']
     ];
 
+    // Devolver los datos necesarios al frontend.
     responder(200, [
         'success' => true,
-        'message' => 'Inicio de sesión exitoso.'
+        'message' => 'Inicio de sesión exitoso.',
+        'usuario' => [
+            'id' => (int) $usuario['id'],
+            'nombre' => $usuario['nombre'],
+            'email' => $usuario['correo_institucional'],
+            'rol' => $usuario['rol'],
+            'carrera_id' => $usuario['carrera_id']
+        ]
     ]);
 
 } catch (Throwable $e) {
+
     error_log('Error en login: ' . $e->getMessage());
 
     responder(500, [
