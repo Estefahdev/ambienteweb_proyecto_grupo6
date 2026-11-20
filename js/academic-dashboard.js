@@ -1,5 +1,5 @@
 "use strict";
-import { loadAcademic, initializeShell, showLoadError, statistics, escapeHtml, icon, readStorage, money } from "./academic-core.js";
+import { loadAcademic, initializeShell, showLoadError, statistics, escapeHtml, icon, money } from "./academic-core.js";
 
 initializeShell();
 try {
@@ -24,14 +24,13 @@ try {
     }).join("");
     const routeElement = document.getElementById("activeRoute");
     try {
-        const response = await fetch("data/rutas-ejemplo.json");
-        if (!response.ok) throw new Error("Routes unavailable");
-        const routes = (await response.json()).rutas;
-        const state = readStorage(localStorage, "unipath.estadoRutas", { guardadas: [1,2], activa: 1 });
-        const route = routes.find(item => item.id === state?.activa && Array.isArray(state.guardadas) && state.guardadas.includes(item.id));
+        const response = await fetch("api/rutas.php");
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error ?? "Routes unavailable");
+        const route = payload.rutas.find(item => item.activa);
         if (route) {
             const metrics = route.metricas;
-            routeElement.innerHTML = `<span class="tag green">Activa</span><h3>${escapeHtml(route.nombre)}</h3><p>${metrics.cuatrimestres} cuatrimestres · ${metrics.horasPromedio} h / sem</p><p>${money(metrics.costoPromedio)} por cuatrimestre</p><p class="muted">Ejemplo guardado. Revisá la ruta si cambiaste tu avance académico.</p><a class="academic-button secondary full-width" href="mis-rutas.html">Ver mis rutas →</a>`;
+            routeElement.innerHTML = `<span class="tag green">Activa</span><h3>${escapeHtml(route.nombre)}</h3><p>${metrics.cuatrimestres} cuatrimestres · ${metrics.horasPromedio} h / sem</p><p>${money(metrics.costoPromedio)} por cuatrimestre</p><a class="academic-button secondary full-width" href="mis-rutas.html">Ver mis rutas →</a>`;
         } else routeElement.innerHTML = '<p>No tenés una ruta activa.</p><a class="academic-button secondary full-width" href="generador-rutas.html">Generar rutas →</a>';
     } catch { routeElement.innerHTML = '<p>No pudimos cargar tus rutas.</p><a href="mis-rutas.html">Consultar Mis rutas →</a>'; }
 } catch (error) { showLoadError(error); }
