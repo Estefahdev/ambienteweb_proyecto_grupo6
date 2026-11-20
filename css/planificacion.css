@@ -1002,6 +1002,28 @@
     margin-top: 20px;
 }
 
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%) translateY(12px);
+    padding: 12px 18px;
+    background: var(--surface);
+    border-left: 4px solid var(--secondary);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgba(31, 41, 51, 0.18);
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+}
+
+.toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
 @media (max-width: 1150px) {
     .mis-rutas-layout {
         grid-template-columns: minmax(0, 1fr);

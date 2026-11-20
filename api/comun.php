@@ -25,10 +25,25 @@ function leerJson(): array
     return $datos;
 }
 
-// Temporal: cuando exista el login, esto sale de $_SESSION
+// Corta con 401 si no hay sesión de estudiante activa
 function usuarioActualId(): int
 {
-    return (int) obtenerConfig()['usuario_prueba_id'];
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_set_cookie_params([
+            'lifetime' => 0,
+            'path' => '/',
+            'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
+        session_start();
+    }
+
+    if (!isset($_SESSION['usuario']['id'])) {
+        responderJson(401, ['error' => 'Tenés que iniciar sesión.']);
+    }
+
+    return (int) $_SESSION['usuario']['id'];
 }
 
 // Cuatrimestres: 1 (ene-abr), 2 (may-ago), 3 (sep-dic); igual que en el JS
