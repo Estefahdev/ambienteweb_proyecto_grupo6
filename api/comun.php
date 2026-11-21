@@ -25,11 +25,24 @@ function leerJson(): array
     return $datos;
 }
 
-// Temporal: cuando exista el login, esto sale de $_SESSION
+
+// Obtener el estudiante autenticado mediante su sesión.
 function usuarioActualId(): int
 {
-    return (int) obtenerConfig()['usuario_prueba_id'];
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        ini_set('session.use_strict_mode', '1');
+        session_start();
+    }
+
+    if (empty($_SESSION['usuario']['id'])) {
+        responderJson(401, [
+            'error' => 'Debés iniciar sesión para acceder a esta información.'
+        ]);
+    }
+
+    return (int) $_SESSION['usuario']['id'];
 }
+
 
 // Cuatrimestres: 1 (ene-abr), 2 (may-ago), 3 (sep-dic); igual que en el JS
 function periodoActual(): string
