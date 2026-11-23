@@ -1,7 +1,7 @@
-
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
+
     const loginForm = document.getElementById("loginForm");
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     passwordInput.addEventListener("input", clearMessage);
 
     loginForm.addEventListener("submit", async (event) => {
+
         event.preventDefault();
         clearMessage();
 
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Ingresá un correo electrónico válido.",
                 "error"
             );
+
             emailInput.focus();
             return;
         }
@@ -60,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.textContent = "Verificando...";
 
         try {
+
             const datos = new URLSearchParams();
 
             datos.append("email", email);
@@ -67,10 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const respuesta = await fetch("api/login.php", {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
+
                 body: datos,
+
                 credentials: "same-origin"
             });
 
@@ -85,28 +91,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Obtener los datos del usuario devueltos por el servidor.
-            const usuario =
-                resultado.usuario ||
-                resultado.user ||
-                resultado.data?.usuario ||
-                resultado.data?.user ||
-                {};
+            // Obtener el usuario devuelto por PHP.
+            const usuario = resultado.usuario;
 
-            // Obtener el nombre del usuario.
-            const nombre =
-                usuario.nombre ||
-                usuario.name ||
-                resultado.nombre ||
-                resultado.name ||
-                email.split("@")[0];
+            if (!usuario || !usuario.rol) {
+                showMessage(
+                    "No se pudo identificar el rol de tu cuenta.",
+                    "error"
+                );
+                return;
+            }
 
-            // Guardar el usuario autenticado.
+            // Guardar información básica en sessionStorage.
             sessionStorage.setItem(
                 "unipathUsuario",
                 JSON.stringify({
-                    nombre: nombre,
-                    email: email
+                    id: usuario.id,
+                    nombre: usuario.nombre,
+                    email: usuario.email,
+                    rol: usuario.rol
                 })
             );
 
@@ -115,10 +118,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 "success"
             );
 
-            // Enviar al panel principal.
-            window.location.replace("index.html");
+            // Redireccionar según el rol.
+            if (usuario.rol === "estudiante") {
+
+                window.location.replace("index.html");
+
+            } else if (usuario.rol === "administrador") {
+
+                window.location.replace("admin/index.html");
+
+            } else {
+
+                sessionStorage.removeItem("unipathUsuario");
+
+                showMessage(
+                    "El rol de usuario no es válido.",
+                    "error"
+                );
+            }
 
         } catch (error) {
+
             console.error("Error de inicio de sesión:", error);
 
             showMessage(
@@ -128,16 +148,19 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
         } finally {
+
             submitButton.disabled = false;
             submitButton.textContent = "Ingresar a UniPath";
         }
     });
 
     forgotLink.addEventListener("click", (event) => {
+
         event.preventDefault();
 
         showMessage(
             "La recuperación de contraseña todavía no está disponible."
         );
     });
+
 });

@@ -25,6 +25,7 @@ function leerJson(): array
     return $datos;
 }
 
+<<<<<<< HEAD
 
 // Obtener el estudiante autenticado mediante su sesión.
 function usuarioActualId(): int
@@ -38,6 +39,24 @@ function usuarioActualId(): int
         responderJson(401, [
             'error' => 'Debés iniciar sesión para acceder a esta información.'
         ]);
+=======
+// Corta con 401 si no hay sesión de estudiante activa
+function usuarioActualId(): int
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_set_cookie_params([
+            'lifetime' => 0,
+            'path' => '/',
+            'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
+        session_start();
+    }
+
+    if (!isset($_SESSION['usuario']['id'])) {
+        responderJson(401, ['error' => 'Tenés que iniciar sesión.']);
+>>>>>>> origin/main
     }
 
     return (int) $_SESSION['usuario']['id'];

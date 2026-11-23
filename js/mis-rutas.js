@@ -1,6 +1,7 @@
 "use strict";
 
 const MAX_COMPARAR = 2;
+const RUTAS_URL = "api/rutas.php";
 
 const rutasLista = document.getElementById("rutasLista");
 const comparativa = document.getElementById("comparativa");
@@ -8,12 +9,12 @@ const confirmarDialogo = document.getElementById("confirmarDialogo");
 const activarBoton = document.getElementById("activarBoton");
 
 let rutas = [];
-let estado = leerEstadoRutas();
 let comparando = [];
 let seleccionadaId = null;
 
+// Todas las rutas que trae la API ya están guardadas; no hace falta filtrar
 function rutasGuardadas() {
-    return rutas.filter((ruta) => estado.guardadas.includes(ruta.id));
+    return rutas;
 }
 
 function rutaSeleccionada() {
@@ -26,7 +27,7 @@ function rutaSeleccionada() {
 
 function htmlFilaLista(ruta) {
     const { metricas } = ruta;
-    const activa = estado.activa === ruta.id;
+    const activa = ruta.activa;
     const marcada = comparando.includes(ruta.id);
     const bloqueada = !marcada && comparando.length >= MAX_COMPARAR;
 
@@ -127,9 +128,8 @@ function pintar() {
         `${ruta.metricas.cuatrimestres} cuatrimestres · Costo total ${colones(ruta.metricas.costoTotal)}`;
     document.getElementById("desglosePeriodos").innerHTML = htmlDesglose(ruta);
 
-    const esActiva = estado.activa === ruta.id;
-    activarBoton.disabled = esActiva;
-    activarBoton.textContent = esActiva ? "Ruta activa" : "Marcar como activa";
+    activarBoton.disabled = ruta.activa;
+    activarBoton.textContent = ruta.activa ? "Ruta activa" : "Marcar como activa";
 }
 
 /* ==========================================
@@ -156,9 +156,19 @@ rutasLista.addEventListener("click", (event) => {
     rutasLista.querySelector(`.ruta-fila-boton[data-id="${seleccionadaId}"]`).focus();
 });
 
-activarBoton.addEventListener("click", () => {
-    estado.activa = seleccionadaId;
-    guardarEstadoRutas(estado);
+activarBoton.addEventListener("click", async () => {
+    activarBoton.disabled = true;
+
+    try {
+        const respuesta = await pedirJson(RUTAS_URL, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: seleccionadaId, accion: "activar" }),
+        });
+        rutas = respuesta.rutas;
+    } catch {
+        // Si falla, pintar() vuelve a mostrar el botón habilitado con el estado anterior
+    }
     pintar();
 });
 
@@ -168,26 +178,27 @@ document.getElementById("eliminarBoton").addEventListener("click", () => {
     confirmarDialogo.showModal();
 });
 
-confirmarDialogo.addEventListener("close", () => {
+confirmarDialogo.addEventListener("close", async () => {
     if (confirmarDialogo.returnValue !== "eliminar") return;
 
-    estado.guardadas = estado.guardadas.filter((id) => id !== seleccionadaId);
-    if (estado.activa === seleccionadaId) {
-        estado.activa = null;
+    try {
+        await pedirJson(`${RUTAS_URL}?id=${seleccionadaId}`, { method: "DELETE" });
+    } catch {
+        return; // la ruta sigue guardada; no se actualiza el estado local
     }
-    guardarEstadoRutas(estado);
 
+    rutas = rutas.filter((ruta) => ruta.id !== seleccionadaId);
     comparando = comparando.filter((id) => id !== seleccionadaId);
-    seleccionadaId = estado.guardadas[0] ?? null;
+    seleccionadaId = rutas[0]?.id ?? null;
     pintar();
 });
 
 async function iniciar() {
     try {
-        rutas = await cargarRutas();
-    } catch {
+        rutas = (await pedirJson(RUTAS_URL)).rutas;
+    } catch (error) {
         const vacio = document.getElementById("misRutasVacio");
-        vacio.textContent = "No se pudieron cargar tus rutas. Recargá la página.";
+        vacio.textContent = error.message || "No se pudieron cargar tus rutas. Recargá la página.";
         vacio.hidden = false;
         document.getElementById("misRutasContenido").hidden = true;
         return;
@@ -195,7 +206,7 @@ async function iniciar() {
 
     const guardadas = rutasGuardadas();
     comparando = guardadas.slice(0, MAX_COMPARAR).map((ruta) => ruta.id);
-    seleccionadaId = estado.activa ?? guardadas[0]?.id ?? null;
+    seleccionadaId = guardadas.find((ruta) => ruta.activa)?.id ?? guardadas[0]?.id ?? null;
     pintar();
 }
 

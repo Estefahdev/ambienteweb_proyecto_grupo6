@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/Registro.css">
     <script src="js/Registro.js" defer></script>
@@ -20,7 +22,10 @@
 
     <main class="register-shell">
 
+        <!-- ===================================== -->
         <!-- PANEL INSTITUCIONAL -->
+        <!-- ===================================== -->
+
         <section class="brand-panel">
 
             <a class="brand-logo" href="login.html" aria-label="UniPath">
@@ -48,10 +53,12 @@
                     para empezar a proyectar tu camino.
                 </p>
 
+                <!-- PASOS LATERALES -->
+
                 <div class="activation-steps">
 
                     <div class="brand-step active" data-brand-step="1">
-                        <span class="brand-step-icon">✓</span>
+                        <span class="brand-step-icon">1</span>
                         <div>
                             <strong>1. Verificación</strong>
                             <span>Correo y carné institucional oficial</span>
@@ -61,15 +68,23 @@
                     <div class="brand-step" data-brand-step="2">
                         <span class="brand-step-icon">2</span>
                         <div>
-                            <strong>2. Seguridad</strong>
-                            <span>Creación de credenciales seguras</span>
+                            <strong>2. Código de seguridad</strong>
+                            <span>Confirmación de tu correo institucional</span>
                         </div>
                     </div>
 
                     <div class="brand-step" data-brand-step="3">
                         <span class="brand-step-icon">3</span>
                         <div>
-                            <strong>3. Acceso total</strong>
+                            <strong>3. Contraseña</strong>
+                            <span>Creación de credenciales seguras</span>
+                        </div>
+                    </div>
+
+                    <div class="brand-step" data-brand-step="4">
+                        <span class="brand-step-icon">4</span>
+                        <div>
+                            <strong>4. Acceso total</strong>
                             <span>Plan curricular interactivo activado</span>
                         </div>
                     </div>
@@ -85,12 +100,16 @@
         </section>
 
 
+        <!-- ===================================== -->
         <!-- PANEL DEL FORMULARIO -->
+        <!-- ===================================== -->
+
         <section class="form-panel">
 
             <div class="activation-card">
 
                 <!-- INDICADOR DE PROGRESO -->
+
                 <div class="progress-steps">
 
                     <div class="progress-step active" data-progress-step="1">
@@ -102,29 +121,41 @@
 
                     <div class="progress-step" data-progress-step="2">
                         <span class="progress-number">2</span>
-                        <span>Contraseña</span>
+                        <span>Código</span>
                     </div>
 
                     <span class="progress-line"></span>
 
                     <div class="progress-step" data-progress-step="3">
                         <span class="progress-number">3</span>
+                        <span>Contraseña</span>
+                    </div>
+
+                    <span class="progress-line"></span>
+
+                    <div class="progress-step" data-progress-step="4">
+                        <span class="progress-number">4</span>
                         <span>Listo</span>
                     </div>
 
                 </div>
 
 
+                <!-- ================================= -->
                 <!-- ETAPA 1: VERIFICACIÓN -->
+                <!-- ================================= -->
+
                 <section class="activation-stage active" id="stageVerify">
 
                     <div class="stage-heading">
+
                         <h2>Activar cuenta</h2>
 
                         <p>
                             Ingresá tu correo institucional y tu carné
                             para verificar tus datos.
                         </p>
+
                     </div>
 
                     <form id="verificationForm">
@@ -136,6 +167,7 @@
                             </label>
 
                             <div class="input-wrapper">
+
                                 <span class="input-symbol">@</span>
 
                                 <input
@@ -146,6 +178,7 @@
                                     autocomplete="email"
                                     maxlength="254"
                                     required>
+
                             </div>
 
                             <small>
@@ -162,6 +195,7 @@
                             </label>
 
                             <div class="input-wrapper">
+
                                 <span class="input-symbol">ID</span>
 
                                 <input
@@ -172,6 +206,7 @@
                                     autocomplete="off"
                                     maxlength="30"
                                     required>
+
                             </div>
 
                             <small>
@@ -197,15 +232,91 @@
                 </section>
 
 
-                <!-- ETAPA 2: CONTRASEÑA -->
+                <!-- ================================= -->
+                <!-- ETAPA 2: CÓDIGO OTP -->
+                <!-- ================================= -->
+
+                <section class="activation-stage" id="stageOtp" hidden>
+
+                    <div class="stage-heading">
+
+                        <h2>Verificá tu correo</h2>
+
+                        <p>
+                            Enviamos un código de seis dígitos a tu correo
+                            institucional. Ingresalo para continuar.
+                        </p>
+
+                    </div>
+
+                    <form id="otpForm">
+
+                        <div class="form-group">
+
+                            <label for="otpCode">
+                                Código de verificación
+                            </label>
+
+                            <input
+                                type="text"
+                                id="otpCode"
+                                name="codigo"
+                                placeholder="000000"
+                                inputmode="numeric"
+                                autocomplete="one-time-code"
+                                maxlength="6"
+                                pattern="[0-9]{6}"
+                                required>
+
+                            <small>
+                                El código tiene una validez de 10 minutos.
+                            </small>
+
+                        </div>
+
+                        <div class="stage-actions">
+
+                            <button
+                                class="secondary-button"
+                                type="button"
+                                id="backToVerify">
+                                Volver
+                            </button>
+
+                            <button class="primary-button" type="submit">
+                                Verificar código
+                                <span aria-hidden="true">→</span>
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <button
+                        class="secondary-button"
+                        type="button"
+                        id="resendOtp">
+                        Reenviar código
+                    </button>
+
+                </section>
+
+
+                <!-- ================================= -->
+                <!-- ETAPA 3: CREAR CONTRASEÑA -->
+                <!-- ================================= -->
+
                 <section class="activation-stage" id="stagePassword" hidden>
 
                     <div class="stage-heading">
+
                         <h2>Protegé tu cuenta</h2>
 
                         <p>
-                            Creá una contraseña segura para acceder a UniPath.
+                            Tu correo ha sido verificado. Ahora creá
+                            una contraseña segura para acceder a UniPath.
                         </p>
+
                     </div>
 
                     <form id="passwordForm">
@@ -220,12 +331,14 @@
                                 type="password"
                                 id="newPassword"
                                 name="password"
-                                placeholder="Mínimo 6 caracteres"
+                                placeholder="Mínimo 8 caracteres"
                                 autocomplete="new-password"
-                                minlength="6"
+                                minlength="8"
+                                maxlength="72"
                                 required>
 
                         </div>
+
 
                         <div class="form-group">
 
@@ -239,15 +352,18 @@
                                 name="confirmPassword"
                                 placeholder="Repetí tu contraseña"
                                 autocomplete="new-password"
-                                minlength="6"
+                                minlength="8"
+                                maxlength="72"
                                 required>
 
                         </div>
+
 
                         <p class="security-note">
                             Tu contraseña debe ser personal y no debes
                             compartirla con otras personas.
                         </p>
+
 
                         <div class="stage-actions">
 
@@ -270,12 +386,18 @@
                 </section>
 
 
-                <!-- ETAPA 3: FINALIZACIÓN -->
-                <section class="activation-stage completion-stage"
+                <!-- ================================= -->
+                <!-- ETAPA 4: FINALIZACIÓN -->
+                <!-- ================================= -->
+
+                <section
+                    class="activation-stage completion-stage"
                     id="stageComplete"
                     hidden>
 
-                    <div class="success-icon" aria-hidden="true">✓</div>
+                    <div class="success-icon" aria-hidden="true">
+                        ✓
+                    </div>
 
                     <h2>¡Todo listo!</h2>
 
@@ -292,7 +414,10 @@
                 </section>
 
 
+                <!-- ================================= -->
                 <!-- MENSAJES -->
+                <!-- ================================= -->
+
                 <p
                     class="form-message"
                     id="registerMessage"
@@ -313,4 +438,5 @@
     </main>
 
 </body>
+
 </html>

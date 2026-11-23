@@ -1,6 +1,8 @@
 "use strict";
 
 const SITUACION_URL = "api/situacion-personal.php";
+const GENERAR_RUTAS_URL = "api/generar-rutas.php";
+const RUTAS_URL = "api/rutas.php";
 
 // Escala de la barra de carga cuando no hay horas disponibles guardadas
 const HORAS_REFERENCIA = 25;
@@ -62,7 +64,6 @@ function htmlTarjeta(ruta) {
     const { metricas } = ruta;
     const etiqueta = ETIQUETAS_RUTA[ruta.tipo];
     const carga = porcentajeCarga(ruta);
-    const guardada = leerEstadoRutas().guardadas.includes(ruta.id);
 
     return `
         <article class="ruta-card ${ruta.recomendadaIa ? "is-recomendada" : ""}">
@@ -87,9 +88,7 @@ function htmlTarjeta(ruta) {
 
             <div class="ruta-acciones">
                 <button class="button-secondary" type="button" data-accion="detalle" data-id="${ruta.id}">Ver detalle</button>
-                <button class="button-primary" type="button" data-accion="guardar" data-id="${ruta.id}" ${guardada ? "disabled" : ""}>
-                    ${guardada ? "Guardada" : "Guardar ruta"}
-                </button>
+                <button class="button-primary" type="button" data-accion="guardar" data-id="${ruta.id}">Guardar ruta</button>
             </div>
         </article>`;
 }
@@ -105,17 +104,28 @@ function mostrarDetalle(ruta) {
     detalleSeccion.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function guardarRuta(id, boton) {
-    const estado = leerEstadoRutas();
-
-    if (!estado.guardadas.includes(id)) {
-        estado.guardadas.push(id);
-        estado.activa ??= id;
-        guardarEstadoRutas(estado);
-    }
-
+async function guardarRuta(ruta, boton) {
     boton.disabled = true;
-    boton.textContent = "Guardada";
+    boton.textContent = "Guardando…";
+
+    try {
+        await pedirJson(RUTAS_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                tipo: ruta.tipo,
+                nombre: ruta.nombre,
+                recomendadaIa: ruta.recomendadaIa,
+                explicacionIa: ruta.explicacionIa,
+                periodos: ruta.periodos,
+            }),
+        });
+        boton.textContent = "Guardada";
+        mostrarAviso("Ruta guardada correctamente.");
+    } catch {
+        boton.disabled = false;
+        boton.textContent = "Guardar ruta";
+    }
 }
 
 /* ==========================================
@@ -128,14 +138,14 @@ generarBoton.addEventListener("click", async () => {
     vacio.textContent = "Generando rutas…";
 
     try {
-        rutas = await cargarRutas();
+        rutas = (await pedirJson(GENERAR_RUTAS_URL)).rutas;
         rutasGrid.innerHTML = rutas.map(htmlTarjeta).join("");
         rutasGrid.hidden = false;
         document.getElementById("rutasNota").hidden = false;
         vacio.hidden = true;
         generarBoton.textContent = "Volver a generar";
-    } catch {
-        vacio.textContent = "No se pudieron generar las rutas. Intentá de nuevo.";
+    } catch (error) {
+        vacio.textContent = error.message || "No se pudieron generar las rutas. Intentá de nuevo.";
     } finally {
         generarBoton.disabled = false;
     }
@@ -146,10 +156,11 @@ rutasGrid.addEventListener("click", (event) => {
     if (!boton) return;
 
     const id = Number(boton.dataset.id);
+    const ruta = rutas.find((r) => r.id === id);
     if (boton.dataset.accion === "detalle") {
-        mostrarDetalle(rutas.find((ruta) => ruta.id === id));
+        mostrarDetalle(ruta);
     } else {
-        guardarRuta(id, boton);
+        guardarRuta(ruta, boton);
     }
 });
 

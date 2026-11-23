@@ -1,0 +1,65 @@
+UNIPATH - CONFIGURACIÓN DE BASE DE DATOS Y ACTIVACIÓN DE CUENTAS
+
+1. CREACIÓN DE LA TABLA codigos_activacion
+
+Ejecutar el siguiente SQL en la base de datos después de crear la tabla usuarios:
+
+CREATE TABLE IF NOT EXISTS codigos_activacion (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNSIGNED NOT NULL,
+    codigo_hash VARCHAR(255) NOT NULL,
+    fecha_expiracion DATETIME NOT NULL,
+    fecha_verificacion DATETIME NULL,
+    intentos TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_codigo_activacion_usuario (usuario_id),
+    CONSTRAINT fk_codigos_activacion_usuario
+        FOREIGN KEY (usuario_id)
+        REFERENCES usuarios(id)
+        ON DELETE CASCADE
+);
+
+2. CONFIGURACIÓN DEL ARCHIVO config/config.php
+
+Cada compañero debe crear su propio archivo config/config.php con las credenciales de su entorno.
+
+return [
+    // Correo SMTP Gmail
+    'mail_host' => 'smtp.gmail.com',
+    'mail_port' => 587,
+    'mail_username' => 'unipath11@gmail.com',
+    'mail_password' => 'kkkw gcxr veva guuk',
+    'mail_from' => 'unipath11@gmail.com',
+    'mail_from_name' => 'UniPath',
+];
+
+3. CONFIGURACIÓN DEL CORREO ELECTRÓNICO
+
+Servidor SMTP: smtp.gmail.com
+Puerto: 587
+Seguridad: STARTTLS
+
+4. REQUISITOS DEL USUARIO PARA ACTIVACIÓN
+
+La tabla usuarios debe existir previamente.
+
+El estudiante que va a activar su cuenta debe tener:
+
+- rol = 'estudiante'
+- estado = 'pendiente'
+- contrasena_hash = NULL
+- correo_institucional válido
+- carne registrado
+
+5. DEPENDENCIA PHPMailer
+
+El proyecto utiliza PHPMailer.
+
+Ubicación:
+libs/PHPMailer-master/src/
+
+Archivos utilizados:
+- Exception.php
+- PHPMailer.php
+- SMTP.php
+
