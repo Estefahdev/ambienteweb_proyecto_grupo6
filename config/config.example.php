@@ -11,4 +11,12 @@ return [
 
     // Temporal hasta que exista el login: estudiante de prueba del seed
     'usuario_prueba_id' => 1,
+
+    // Correo SMTP para los codigos de activacion de cuenta (PHPMailer)
+    'mail_host'      => 'smtp.gmail.com',
+    'mail_port'      => 587,
+    'mail_username'  => '',
+    'mail_password'  => '',
+    'mail_from'      => '',
+    'mail_from_name' => 'UniPath',
 ];
