@@ -13,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'SELECT nombre, carrera_id
          FROM usuarios
          WHERE id = ?
-           AND rol = "estudiante"
-           AND estado = "activo"'
+           AND rol = \'estudiante\'
+           AND estado = \'activo\''
     );
 
     $consulta->execute([$usuarioId]);
@@ -139,8 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              SELECT carrera_id
              FROM usuarios
              WHERE id = ?
-               AND rol = "estudiante"
-               AND estado = "activo"
+               AND rol = \'estudiante\'
+               AND estado = \'activo\'
          )'
     );
 
