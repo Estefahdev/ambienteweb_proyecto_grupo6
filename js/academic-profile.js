@@ -43,15 +43,60 @@ try {
         render();
         document.querySelector(`[data-course="${course}"][data-state="${state}"]`)?.focus();
     });
-    document.getElementById("saveProfile").addEventListener("click", () => {
-        try {
-            localStorage.setItem(data.storageKey, JSON.stringify(data.states));
-            dirty = false;
-            document.getElementById("saveStatus").textContent = `Último guardado: ${new Intl.DateTimeFormat("es-CR", { hour: "2-digit", minute: "2-digit" }).format(new Date())}`;
-            notify("Guardaste tu avance académico.");
-            render();
-        } catch { notify("No se pudo guardar en este navegador. Tus cambios siguen en pantalla; intentá de nuevo.", true); }
-    });
+    
+document.getElementById("saveProfile").addEventListener("click", async () => {
+
+    const saveButton = document.getElementById("saveProfile");
+    const status = document.getElementById("saveStatus");
+
+    saveButton.disabled = true;
+    status.textContent = "Guardando avance académico...";
+
+    try {
+
+        const response = await fetch("api/academic-progress.php", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                states: data.states
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                result.error || "No se pudo guardar el avance."
+            );
+        }
+
+        dirty = false;
+
+        status.textContent = `Último guardado: ${
+            new Intl.DateTimeFormat("es-CR", {
+                hour: "2-digit",
+                minute: "2-digit"
+            }).format(new Date())
+        }`;
+
+        notify(result.mensaje || "Avance académico guardado correctamente.");
+
+        render();
+
+    } catch (error) {
+
+        saveButton.disabled = false;
+
+        status.textContent = error.message;
+
+        notify(error.message, true);
+    }
+});
+
     window.addEventListener("beforeunload", event => { if (dirty) { event.preventDefault(); event.returnValue = ""; } });
     render();
 } catch (error) { showLoadError(error); }

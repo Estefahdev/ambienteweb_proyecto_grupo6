@@ -19,19 +19,50 @@ export function notify(message, error = false) {
     notice.classList.toggle("error", error);
 }
 
+
 export async function loadAcademic() {
-    const response = await fetch("data/academic-example.json");
-    if (!response.ok) throw new Error("No se pudieron cargar las materias. Recargá la página.");
-    const data = await response.json();
-    const user = readStorage(sessionStorage, "unipathUsuario", null);
-    const userId = user?.id ?? user?.correo_institucional ?? user?.correo ?? "demo";
-    data.storageKey = `${storageKey}.${userId}`;
-    const saved = readStorage(localStorage, data.storageKey, {});
-    data.states = Object.fromEntries(data.courses.map(course => [course.code, ["aprobada", "en_curso", "pendiente"].includes(saved?.[course.code]) ? saved[course.code] : data.states[course.code]]));
-    data.userName = typeof user?.nombre === "string" ? user.nombre : "Estudiante de prueba";
-    document.getElementById("accountName").textContent = data.userName;
+
+    const response = await fetch("api/academic-progress.php", {
+        method: "GET",
+        credentials: "same-origin",
+        headers: {
+            "Accept": "application/json"
+        }
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            result.error || "No se pudieron cargar las materias."
+        );
+    }
+
+    const data = {
+        courses: result.courses,
+        states: {},
+        userName: result.userName || "Estudiante"
+    };
+
+    // Todas las materias tienen un estado inicial.
+    for (const course of data.courses) {
+        const estado = result.states[course.code];
+
+        data.states[course.code] = [
+            "aprobada",
+            "en_curso"
+        ].includes(estado) ? estado : "pendiente";
+    }
+
+    const accountName = document.getElementById("accountName");
+
+    if (accountName) {
+        accountName.textContent = data.userName;
+    }
+
     return data;
 }
+
 
 export function courseState(course, states) {
     const recorded = states[course.code] ?? "pendiente";

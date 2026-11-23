@@ -46,6 +46,7 @@ function usuarioActualId(): int
     return (int) $_SESSION['usuario']['id'];
 }
 
+
 // Cuatrimestres: 1 (ene-abr), 2 (may-ago), 3 (sep-dic); igual que en el JS
 function periodoActual(): string
 {
