@@ -163,14 +163,21 @@
     font-size: 13px;
 }
 
-.up-etiqueta-activa {
+.up-etiqueta-activa,
+.up-etiqueta-activo {
     background: #dff6ee;
     color: #17634e;
 }
 
-.up-etiqueta-inactiva {
+.up-etiqueta-inactiva,
+.up-etiqueta-inactivo {
     background: #fce9e8;
     color: #9f302c;
+}
+
+.up-etiqueta-pendiente {
+    background: #fdf1dc;
+    color: #8a5a10;
 }
 
 .up-modal {
@@ -237,6 +244,29 @@
 .up-error {
     color: #9f302c;
     margin-bottom: 0;
+}
+
+.up-opcion-grupo {
+    grid-column: 1 / -1;
+    max-height: 180px;
+    overflow-y: auto;
+    padding: 10px 12px;
+    border: 1px solid var(--up-borde);
+    border-radius: 8px;
+}
+
+.up-opcion-grupo legend {
+    padding: 0 4px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.up-opcion-linea {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 14px;
 }
 
 .up-lector {

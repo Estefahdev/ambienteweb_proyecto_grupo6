@@ -87,6 +87,15 @@ const tabla = UI.crearTabla({
 
                 acciones.append(
                     UI.boton(
+                        "Asignaturas",
+                        () => {
+                            window.location.assign(
+                                `admin-carrera-detalle.html?id=${fila.id}`
+                            );
+                        }
+                    ),
+
+                    UI.boton(
                         "Editar",
                         () => abrirCarrera(fila)
                     ),

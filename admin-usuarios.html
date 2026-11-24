@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Usuarios | Administración UniPath</title>
+
+    <link
+        rel="stylesheet"
+        href="css/componentes.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
+
+    <script src="js/componentes.js" defer></script>
+    <script src="js/admin-api.js" defer></script>
+    <script src="js/admin-csv.js" defer></script>
+    <script src="js/admin-usuarios.js" defer></script>
+</head>
+
+<body class="up-demo">
+
+    <div class="up-admin">
+
+        <aside class="up-admin-lateral">
+
+            <img
+                src="assets/logo-unipath.png"
+                alt="UniPath"
+            >
+
+            <p class="up-admin-rol">
+                ADMINISTRADOR
+            </p>
+
+            <nav
+                class="up-admin-nav"
+                aria-label="Administración"
+            >
+                <a href="admin-carreras.html">
+                    Carreras
+                </a>
+
+                <a
+                    href="admin-usuarios.html"
+                    aria-current="page"
+                >
+                    Usuarios
+                </a>
+
+                <a href="admin-acceso.html">
+                    Mi sesión
+                </a>
+            </nav>
+
+            <button
+                id="cerrarSesion"
+                class="up-boton up-boton-peligro up-admin-salir"
+                type="button"
+                disabled
+            >
+                Cerrar sesión
+            </button>
+
+        </aside>
+
+        <main class="up-admin-main">
+
+            <header class="up-admin-topbar">
+
+                <span>
+                    UniPath / Administración / Usuarios
+                </span>
+
+                <span id="nombreAdmin"></span>
+
+            </header>
+
+            <section
+                id="avisoAcceso"
+                class="up-tarjeta"
+                aria-label="Acceso"
+            >
+                <p
+                    id="textoAcceso"
+                    role="status"
+                >
+                    Comprobando sesión...
+                </p>
+
+                <a href="admin-acceso.html">
+                    Ir al acceso de administración
+                </a>
+            </section>
+
+            <div id="contenidoAdmin" hidden>
+
+                <div class="up-admin-hero">
+
+                    <div>
+                        <h1>Usuarios</h1>
+
+                        <p class="up-nota">
+                            Estudiantes y administradores registrados en la universidad.
+                        </p>
+                    </div>
+
+                    <div class="up-acciones">
+
+                        <button
+                            id="actualizar"
+                            class="up-boton"
+                            type="button"
+                        >
+                            Actualizar
+                        </button>
+
+                        <button
+                            id="importarCsv"
+                            class="up-boton"
+                            type="button"
+                        >
+                            Importar estudiantes (CSV)
+                        </button>
+
+                        <button
+                            id="nuevoAdmin"
+                            class="up-boton up-boton-primario"
+                            type="button"
+                        >
+                            Agregar administrador
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="up-admin-resumen">
+
+                    <section class="up-tarjeta">
+                        <p>Usuarios totales</p>
+                        <strong id="totalUsuarios">0</strong>
+                    </section>
+
+                    <section class="up-tarjeta">
+                        <p>Estudiantes</p>
+                        <strong id="totalEstudiantes">0</strong>
+                    </section>
+
+                    <section class="up-tarjeta">
+                        <p>Administradores</p>
+                        <strong id="totalAdmins">0</strong>
+                    </section>
+
+                </div>
+
+                <p
+                    id="mensajeUsuarios"
+                    class="up-admin-aviso"
+                    role="status"
+                    hidden
+                ></p>
+
+                <section
+                    class="up-tarjeta"
+                    aria-label="Listado de usuarios"
+                >
+
+                    <div class="up-admin-filtros">
+
+                        <label>
+                            Rol
+
+                            <select
+                                id="filtroRol"
+                                class="up-campo"
+                            >
+                                <option value="">Todos los roles</option>
+                                <option value="estudiante">Estudiantes</option>
+                                <option value="administrador">Administradores</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Estado
+
+                            <select
+                                id="filtroEstado"
+                                class="up-campo"
+                            >
+                                <option value="">Todos los estados</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                            </select>
+                        </label>
+
+                    </div>
+
+                    <div id="tablaUsuarios"></div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

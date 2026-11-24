@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Detalle de carrera | Administración UniPath</title>
+
+    <link
+        rel="stylesheet"
+        href="css/componentes.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
+
+    <script src="js/componentes.js" defer></script>
+    <script src="js/admin-api.js" defer></script>
+    <script src="js/admin-csv.js" defer></script>
+    <script src="js/admin-carrera-detalle.js" defer></script>
+</head>
+
+<body class="up-demo">
+
+    <div class="up-admin">
+
+        <aside class="up-admin-lateral">
+
+            <img
+                src="assets/logo-unipath.png"
+                alt="UniPath"
+            >
+
+            <p class="up-admin-rol">
+                ADMINISTRADOR
+            </p>
+
+            <nav
+                class="up-admin-nav"
+                aria-label="Administración"
+            >
+                <a href="admin-carreras.html">
+                    Carreras
+                </a>
+
+                <a href="admin-usuarios.html">
+                    Usuarios
+                </a>
+
+                <a href="admin-acceso.html">
+                    Mi sesión
+                </a>
+            </nav>
+
+            <button
+                id="cerrarSesion"
+                class="up-boton up-boton-peligro up-admin-salir"
+                type="button"
+                disabled
+            >
+                Cerrar sesión
+            </button>
+
+        </aside>
+
+        <main class="up-admin-main">
+
+            <header class="up-admin-topbar">
+
+                <span>
+                    UniPath / Administración / Carreras / <span id="migaCarrera">Detalle</span>
+                </span>
+
+                <span id="nombreAdmin"></span>
+
+            </header>
+
+            <section
+                id="avisoAcceso"
+                class="up-tarjeta"
+                aria-label="Acceso"
+            >
+                <p
+                    id="textoAcceso"
+                    role="status"
+                >
+                    Comprobando sesión...
+                </p>
+
+                <a href="admin-acceso.html">
+                    Ir al acceso de administración
+                </a>
+            </section>
+
+            <div id="contenidoAdmin" hidden>
+
+                <a href="admin-carreras.html" class="up-nota">
+                    ← Volver a Carreras
+                </a>
+
+                <div class="up-admin-hero">
+
+                    <div>
+                        <h1 id="tituloCarrera">Asignaturas</h1>
+
+                        <p class="up-nota" id="notaCarrera">
+                            Materias del plan de estudios de esta carrera.
+                        </p>
+                    </div>
+
+                    <div class="up-acciones">
+
+                        <button
+                            id="actualizar"
+                            class="up-boton"
+                            type="button"
+                        >
+                            Actualizar
+                        </button>
+
+                        <button
+                            id="importarCsv"
+                            class="up-boton"
+                            type="button"
+                        >
+                            Importar CSV
+                        </button>
+
+                        <button
+                            id="nuevaAsignatura"
+                            class="up-boton up-boton-primario"
+                            type="button"
+                        >
+                            Agregar asignatura
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <p
+                    id="mensajeAsignaturas"
+                    class="up-admin-aviso"
+                    role="status"
+                    hidden
+                ></p>
+
+                <section
+                    class="up-tarjeta"
+                    aria-label="Listado de asignaturas"
+                >
+                    <div id="tablaAsignaturas"></div>
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
